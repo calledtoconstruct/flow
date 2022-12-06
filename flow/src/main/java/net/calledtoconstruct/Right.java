@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class Right<TLeft, TRight> implements Either<TLeft, TRight> {
@@ -35,6 +36,17 @@ public class Right<TLeft, TRight> implements Either<TLeft, TRight> {
     public Either<TLeft, TRight> onRightAccept(Consumer<TRight> consumer) {
         consumer.accept(value);
         return this;
+    }
+
+    @Override
+    public <TOther> Either<TOther, TRight> onLeftSupply(Supplier<TOther> supplier) {
+        return new Right<>(value);
+    }
+
+    @Override
+    public <TOther> Either<TLeft, TOther> onRightSupply(Supplier<TOther> supplier) {
+        final var other = supplier.get();
+        return new Right<>(other);
     }
 
     public TRight getValue() {
