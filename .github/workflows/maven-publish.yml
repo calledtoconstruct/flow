@@ -28,7 +28,7 @@ jobs:
     - name: Build with Maven
       run: |
         cd ./flow
-        mvn -B package --file pom.xml
+        mvn package
 
     - name: Publish to GitHub Packages Apache Maven
       run: |
