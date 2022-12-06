@@ -80,12 +80,8 @@
       </plugins>
     </pluginManagement>
   </build>
+
   <distributionManagement>
-    <repository>
-      <id>github</id>
-      <name>GitHub Packages</name>
-      <url>https://maven.pkg.github.com/calledtoconstruct/flow</url>
-    </repository>
     <snapshotRepository>
       <id>ossrh</id>
       <url>https://oss.sonatype.org/content/repositories/snapshots</url>
@@ -95,4 +91,5 @@
       <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
     </repository>
   </distributionManagement>
+  
 </project>
