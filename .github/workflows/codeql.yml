@@ -78,8 +78,8 @@ jobs:
         mvn --batch-mode --update-snapshots package
         
     - run: |
-        echo "Build Examples"
-        cd ./examples
+        echo "Build Example"
+        cd ./example
         mvn --batch-mode --update-snapshots package
 
     - name: Perform CodeQL Analysis
