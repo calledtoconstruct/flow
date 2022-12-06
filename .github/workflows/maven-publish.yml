@@ -33,6 +33,11 @@ jobs:
     - name: Publish to GitHub Packages Apache Maven
       run: |
         cd ./flow
-        mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+        mvn deploy -s $GITHUB_WORKSPACE/settings.xml -P github,!central
       env:
         GITHUB_TOKEN: ${{ github.token }}
+        
+    - name: Publish to Maven Central
+      run: |
+        cd ./flow
+        mvn deploy -s $GITHUB_WORKSPACE/settings.xml -P central,!github
