@@ -75,7 +75,7 @@ jobs:
     - run: |
         echo "Build Flow Library"
         cd ./flow
-        mvn --batch-mode --update-snapshots package
+        mvn --batch-mode --update-snapshots install
         
     - run: |
         echo "Build Example"
