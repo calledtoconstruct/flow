@@ -102,4 +102,27 @@
 		</plugins>
 	</build>
 
+	<profiles>
+		<profile>
+			<id>ossrh</id>
+			<repositories>
+				<repository>
+				  <id>ossrh</id>
+				  <name>Maven Central</name>
+				  <url>https://repo1.maven.org/maven2</url>
+				</repository>
+			</repositories>
+		</profile>
+		<profile>
+			<id>github</id>
+			<repositories>
+				<repository>
+				  <id>github</id>
+				  <name>GitHub Packages</name>
+				  <url>https://maven.pkg.github.com/calledtoconstruct/flow</url>
+				</repository>
+			</repositories>
+		</profile>
+	</profiles>
+
 </project>
