@@ -55,7 +55,7 @@ jobs:
     - name: Publish to OSSRH Maven Central
       run: |
         cd ./flow
-        mvn --batch-mode deploy -P ossrh
+        mvn --batch-mode deploy -s $GITHUB_WORKSPACE/settings.xml -P ossrh
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
