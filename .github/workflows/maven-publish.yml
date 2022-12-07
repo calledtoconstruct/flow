@@ -18,7 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-    - name: Set up JDK 17
+    - name: Set up JDK 17 for GitHub Packages
       uses: actions/setup-java@v3
       with:
         java-version: '17'
@@ -26,19 +26,19 @@ jobs:
         server-id: github
         settings-path: ${{ github.workspace }}
 
-    - name: Build with Maven
+    - name: Build with Maven for GitHub Packages
       run: |
         cd ./flow
         mvn package
 
-    - name: Publish to GitHub Packages Apache Maven
+    - name: Publish to GitHub Packages
       run: |
         cd ./flow
-        mvn --batch-mode deploy
+        mvn --batch-mode deploy -s $GITHUB_WORKSPACE/settings.xml
       env:
         GITHUB_TOKEN: ${{ github.token }}
         
-    - name: Set up JDK 17
+    - name: Set up JDK 17 for OSSRH
       uses: actions/setup-java@v3
       with:
         java-version: '17'
@@ -47,12 +47,12 @@ jobs:
         server-username: MAVEN_USERNAME
         server-password: MAVEN_PASSWORD
 
-    - name: Build with Maven
+    - name: Build with Maven for OSSRH
       run: |
         cd ./flow
         mvn package
         
-    - name: Publish to Maven Central
+    - name: Publish to OSSRH Maven Central
       run: |
         cd ./flow
         mvn --batch-mode deploy
