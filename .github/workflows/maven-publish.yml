@@ -34,7 +34,7 @@ jobs:
     - name: Publish to GitHub Packages
       run: |
         cd ./flow
-        mvn --batch-mode deploy -s $GITHUB_WORKSPACE/settings.xml
+        mvn --batch-mode deploy -s $GITHUB_WORKSPACE/settings.xml -P github
       env:
         GITHUB_TOKEN: ${{ github.token }}
         
@@ -55,7 +55,7 @@ jobs:
     - name: Publish to OSSRH Maven Central
       run: |
         cd ./flow
-        mvn --batch-mode deploy
+        mvn --batch-mode deploy -P ossrh
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
