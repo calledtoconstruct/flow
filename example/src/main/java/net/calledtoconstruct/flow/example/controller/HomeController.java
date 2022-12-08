@@ -11,8 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import net.calledtoconstruct.Either;
-import net.calledtoconstruct.Left;
-import net.calledtoconstruct.Right;
 import net.calledtoconstruct.Tuple1;
 import net.calledtoconstruct.Tuple3;
 import net.calledtoconstruct.flow.example.service.DataService;
@@ -33,16 +31,6 @@ public class HomeController {
         model.addAttribute("date", data.getSecond());
         model.addAttribute("rows", data.getThird());
     }
-
-    private String getPageName(final Either<String, String> result) {
-        if (result instanceof Left<String, String> left) {
-            return left.getValue();
-        } else if (result instanceof Right<String, String> right) {
-            return right.getValue();
-        } else {
-            return "unexpected";
-        }
-    }
     
     @GetMapping("/")
     public String get(Model model) {
@@ -57,7 +45,7 @@ public class HomeController {
                 .onLeftSupply(() -> "index")
                 .onRightAccept(message -> model.addAttribute("message", message))
                 .onRightSupply(() -> "error");
-            return getPageName(result);
+            return Either.coalesce(result, "unexpected");
         } catch (final InterruptedException | ExecutionException exception) {
             return "error";
         }

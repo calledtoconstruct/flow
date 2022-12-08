@@ -5,10 +5,30 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public interface Either<TLeft, TRight> {
-    public <TOther> Either<TOther, TRight> onLeftApply(Function<TLeft, TOther> function);
-    public <TOther> Either<TLeft, TOther> onRightApply(Function<TRight, TOther> function);
-    public Either<TLeft, TRight> onLeftAccept(Consumer<TLeft> consumer);
-    public Either<TLeft, TRight> onRightAccept(Consumer<TRight> consumer);
-    public <TOther> Either<TOther, TRight> onLeftSupply(Supplier<TOther> supplier);
-    public <TOther> Either<TLeft, TOther> onRightSupply(Supplier<TOther> supplier);
+
+    <TOther> Either<TOther, TRight> onLeftApply(Function<TLeft, TOther> function);
+    Either<TLeft, TRight> onLeftAccept(Consumer<TLeft> consumer);
+    <TOther> Either<TOther, TRight> onLeftSupply(Supplier<TOther> supplier);
+
+    <TOther> Either<TLeft, TOther> onRightApply(Function<TRight, TOther> function);
+    Either<TLeft, TRight> onRightAccept(Consumer<TRight> consumer);
+    <TOther> Either<TLeft, TOther> onRightSupply(Supplier<TOther> supplier);
+    
+    static <TOther> TOther coalesce(final Either<TOther, TOther> either, final TOther defaultValue) {
+        try {
+            return Either.coalesce(either);
+        } catch (final UnexpectedNeitherException exception) {
+            return defaultValue;
+        }
+    }
+    
+    static <TOther> TOther coalesce(final Either<TOther, TOther> either) throws UnexpectedNeitherException {
+        if (either instanceof Left<TOther, TOther> left) {
+            return left.getValue();
+        } else if (either instanceof Right<TOther, TOther> right) {
+            return right.getValue();
+        } else {
+            throw new UnexpectedNeitherException();
+        }
+    }
 }
