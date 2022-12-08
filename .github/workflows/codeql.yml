@@ -75,12 +75,12 @@ jobs:
     - run: |
         echo "Build Flow Library"
         cd ./flow
-        mvn --batch-mode --update-snapshots install
+        mvn --batch-mode --no-transfer-progress --update-snapshots install
         
     - run: |
         echo "Build Example"
         cd ./example
-        mvn --batch-mode --update-snapshots package
+        mvn --batch-mode --no-transfer-progress --update-snapshots package
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
