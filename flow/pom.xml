@@ -6,9 +6,10 @@
 
   <groupId>net.calledtoconstruct</groupId>
   <artifactId>flow</artifactId>
-  <version>1.1-SNAPSHOT</version>
+  <version>1.1</version>
 
-  <name>flow</name>
+  <name>${project.groupId}:${project.artifactId}</name>
+  <description>A small collection of potentially useful classes for streamlining process flow.</description>
   <url>https://github.com/calledtoconstruct/flow</url>
  
   <licenses>
@@ -20,8 +21,19 @@
   </licenses>
  
   <scm>
+    <connection>scm:git:git://github.com/calledtoconstruct/flow.git</connection>
+    <developerConnection>scm:git:ssh://github.com:calledtoconstruct/flow.git</developerConnection>
     <url>https://github.com/calledtoconstruct/flow/tree/main</url>
   </scm>
+
+  <developers>
+    <developer>
+      <name>Joseph Woolley</name>
+      <email>joe@calledtoconstruct.net</email>
+      <organization>Called To Construct</organization>
+      <organizationUrl>https://github.com/calledtoconstruct</organizationUrl>
+    </developer>
+  </developers>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -110,13 +122,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-gpg-plugin</artifactId>
-        <version>1.5</version>
-        <configuration>
-          <gpgArguments>
-            <arg>--pinentry-mode</arg>
-            <arg>loopback</arg>
-          </gpgArguments>
-        </configuration>
+        <version>3.0.1</version>
         <executions>
           <execution>
             <id>sign-artifacts</id>
@@ -142,7 +148,7 @@
             <version>3.0.0</version>
           </plugin>
         </plugins>
-        </build>
+      </build>
       <distributionManagement>
         <repository>
           <id>github</id>
@@ -173,10 +179,6 @@
           <id>ossrh</id>
           <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
-        <repository>
-          <id>ossrh</id>
-          <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
       </distributionManagement>
     </profile>
   </profiles>
