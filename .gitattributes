@@ -1,0 +1,4 @@
+*.md text auto
+*.yml text auto
+*.xml text auto
+LICENSE text auto
