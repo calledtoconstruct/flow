@@ -17,7 +17,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-        
+    
     - name: Set up JDK 17 for OSSRH
       uses: actions/setup-java@v3
       with:
@@ -26,11 +26,16 @@ jobs:
         server-id: ossrh
         server-username: MAVEN_USERNAME
         server-password: MAVEN_PASSWORD
+        settings-path: ${{ github.workspace }}
+
+    - id: install-secret-key
+      name: Install gpg secret key
+      run: cat <(echo -e "${{ secrets.OSSRH_GPG_SECRET_KEY }}") | gpg --batch --import
         
     - name: Publish to OSSRH Maven Central
       run: |
         cd ./flow
-        mvn --batch-mode deploy -P ossrh
+        mvn --batch-mode --no-transfer-progress deploy -s $GITHUB_WORKSPACE/settings.xml -P ossrh -Dgpg.passphrase=${{ secrets.OSSRH_GPG_PASSPHRASE }}
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
@@ -46,6 +51,6 @@ jobs:
     - name: Publish to GitHub Packages
       run: |
         cd ./flow
-        mvn --batch-mode deploy -s $GITHUB_WORKSPACE/settings.xml -P github
+        mvn --batch-mode --no-transfer-progress deploy -s $GITHUB_WORKSPACE/settings.xml -P github
       env:
         GITHUB_TOKEN: ${{ github.token }}
