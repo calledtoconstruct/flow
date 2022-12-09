@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import net.calledtoconstruct.Either;
 import net.calledtoconstruct.Tuple1;
+import net.calledtoconstruct.Tuple2;
 import net.calledtoconstruct.Tuple3;
+import net.calledtoconstruct.Tuple4;
+import net.calledtoconstruct.UnexpectedNeitherException;
 import net.calledtoconstruct.flow.example.service.DataService;
 
 @Controller
@@ -26,27 +29,40 @@ public class HomeController {
         this.dataService = dataService;
     }
 
-    private void populateModel(final Model model, final Tuple3<String, Date, List<String>> data) {
+    private void populateModel(
+        final Model model,
+        final Tuple3<String, Date, Tuple2<List<String>, Long>> data
+    ) {
         model.addAttribute("title", data.getFirst());
         model.addAttribute("date", data.getSecond());
-        model.addAttribute("rows", data.getThird());
+        final var rowsAndCount = data.getThird();
+        model.addAttribute("rows", rowsAndCount.getFirst());
+        model.addAttribute("count", rowsAndCount.getSecond());
     }
     
     @GetMapping("/")
     public String get(Model model) {
         try {
-            final var future = CompletableFuture.supplyAsync(dataService::get);
-            final var instant = Instant.parse("2022-01-10T10:14:55Z");
+            final var dataFuture = CompletableFuture.supplyAsync(dataService::get);
+            final var countFuture = CompletableFuture.supplyAsync(dataService::count);
+            final var instant = Instant.now();
             final var titleAndDate = TITLE
                 .push(Date.from(instant));
-            final var result = future.get()
+            final var result = dataFuture.get()
+                .mergeFailRight(
+                    countFuture.get(),
+                    (data, count) -> new Tuple2<>(data, count),
+                    (dataError, countError) -> dataError,
+                    (countError) -> countError,
+                    (dataError) -> dataError
+                )
                 .onLeftApply(rows -> titleAndDate.push(rows))
-                .onLeftAccept(titleDateAndRows -> populateModel(model, titleDateAndRows))
+                .onLeftAccept(titleDateRowsAndCount -> populateModel(model, titleDateRowsAndCount))
                 .onLeftSupply(() -> "index")
                 .onRightAccept(message -> model.addAttribute("message", message))
                 .onRightSupply(() -> "error");
             return Either.coalesce(result, "unexpected");
-        } catch (final InterruptedException | ExecutionException exception) {
+        } catch (final InterruptedException | ExecutionException | UnexpectedNeitherException exception) {
             return "error";
         }
     }

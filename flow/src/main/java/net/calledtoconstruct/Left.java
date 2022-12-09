@@ -77,4 +77,42 @@ public class Left<TLeft, TRight> implements Either<TLeft, TRight> {
         }
         return Optional.empty();
     }
+
+    @Override
+    public <TOtherLeftIn, TOtherRightIn, TOtherLeftOut, TOtherRightOut> Either<TOtherLeftOut, TOtherRightOut> mergeFailLeft(
+        Either<TOtherLeftIn, TOtherRightIn> other,
+        Function2<TLeft, TOtherLeftIn, TOtherLeftOut> functionLeft,
+        Function2<TRight, TOtherRightIn, TOtherRightOut> functionRight,
+        Function<TLeft, TOtherLeftOut> failThis,
+        Function<TOtherLeftIn, TOtherLeftOut> failOther
+        // Function2<TLeft, TOtherRightIn, TOtherLeftOut> failLeftRightLeft,
+        // Function2<TRight, TOtherLeftIn, TOtherLeftOut> failRightLeftLeft
+    ) throws UnexpectedNeitherException {
+        if (other instanceof Left<TOtherLeftIn, TOtherRightIn> left) {
+            return new Left<TOtherLeftOut, TOtherRightOut>(functionLeft.apply(value, left.value));
+        } else if (other instanceof Right<TOtherLeftIn, TOtherRightIn> right) {
+            return new Left<TOtherLeftOut, TOtherRightOut>(failThis.apply(value));
+        } else {
+            throw new UnexpectedNeitherException();
+        }
+    }
+
+    @Override
+    public <TOtherLeftIn, TOtherRightIn, TOtherLeftOut, TOtherRightOut> Either<TOtherLeftOut, TOtherRightOut> mergeFailRight(
+        Either<TOtherLeftIn, TOtherRightIn> other,
+        Function2<TLeft, TOtherLeftIn, TOtherLeftOut> functionLeft,
+        Function2<TRight, TOtherRightIn, TOtherRightOut> functionRight,
+        Function<TOtherRightIn, TOtherRightOut> failOther,
+        Function<TRight, TOtherRightOut> failThis
+        // Function2<TLeft, TOtherRightIn, TOtherRightOut> failLeftRightRight,
+        // Function2<TRight, TOtherLeftIn, TOtherRightOut> failRightLeftRight
+    ) throws UnexpectedNeitherException {
+        if (other instanceof Left<TOtherLeftIn, TOtherRightIn> left) {
+            return new Left<TOtherLeftOut, TOtherRightOut>(functionLeft.apply(value, left.value));
+        } else if (other instanceof Right<TOtherLeftIn, TOtherRightIn> right) {
+            return new Right<TOtherLeftOut, TOtherRightOut>(failOther.apply(right.getValue()));
+        } else {
+            throw new UnexpectedNeitherException();
+        }
+    }
 }

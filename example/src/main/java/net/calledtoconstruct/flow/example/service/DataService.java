@@ -30,4 +30,14 @@ public class DataService {
             return new Right<List<String>, String>(exception.getMessage());
         }
     }
+
+    public Either<Long, String> count() {
+        try {
+            return new Left<Long, String>(dataRepository
+                .count()
+            );
+        } catch (final DataAccessException exception) {
+            return new Right<Long, String>(exception.getMessage());
+        }
+    }
 }
