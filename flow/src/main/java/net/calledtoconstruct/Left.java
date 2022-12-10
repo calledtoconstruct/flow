@@ -12,6 +12,11 @@ public class Left<TLeft, TRight> implements Either<TLeft, TRight> {
 
     private final TLeft value;
 
+    /**
+     * An implementation of {@link Either} in which the {@link Left} value of type {@code TLeft} is retained.
+     * 
+     * @param value The value of type {@code TLeft} to store.
+     */
     public Left(TLeft value) {
         this.value = value;
     }
@@ -49,10 +54,25 @@ public class Left<TLeft, TRight> implements Either<TLeft, TRight> {
         return new Left<>(value);
     }
 
+    /**
+     * Get the contained value of type {@code TLeft}.
+     * 
+     * @return the value of type {@code TLeft}
+     */
     public TLeft getValue() {
         return value;
     }
     
+    /**
+     * A function which accepts zero to many instances of {@link Either}, collects all the values from those of type {@link Left}, and invokes the supplied
+     * {@code consumer}, passing the {@link java.util.List} of {@code TLeft} values as the parameter.
+     * 
+     * @param <TLeft> The type for the {@link Left} value.
+     * @param <TRight> The type for the {@link Right} value.
+     * @param consumer A method which receives a {@link java.util.List} of {@code TLeft} values collected from any of the supplied {@code input} which are of type {@link Left}.
+     * @param input Zero or more instances of {@link Either} to be evaluated.
+     * @return {@code true} when {@code input} contains at least one instance of {@link Left}, otherwise, {@code false}.
+     */
     @SafeVarargs
     public static <TLeft, TRight> boolean acceptAll(Consumer<List<TLeft>> consumer, Either<TLeft, TRight>... input) {
         final var values = Arrays.stream(input)
@@ -68,6 +88,15 @@ public class Left<TLeft, TRight> implements Either<TLeft, TRight> {
         return false;
     }
 
+    /**
+     * A function which accepts zero to many instances of {@link Either}, searches for any instance of type {@link Left}, then extracts its value and returns
+     * it as an {@link java.util.Optional}.  When no instance of type {@link Left} is provided, an empty {@link java.util.Optional} is returned.
+     * 
+     * @param <TLeft> The type for the {@link Left} value.
+     * @param <TRight> The type for the {@link Right} value.
+     * @param input Zero or more instances of {@link Either} to be evaluated.
+     * @return And {@link java.util.Optional} of type {@code TLeft} or empty.
+     */
     @SafeVarargs
     public static <TLeft, TRight> Optional<TLeft> any(Either<TLeft, TRight>... input) {
         for (var either : input) {
@@ -79,38 +108,34 @@ public class Left<TLeft, TRight> implements Either<TLeft, TRight> {
     }
 
     @Override
-    public <TOtherLeftIn, TOtherRightIn, TOtherLeftOut, TOtherRightOut> Either<TOtherLeftOut, TOtherRightOut> mergeFailLeft(
-        Either<TOtherLeftIn, TOtherRightIn> other,
-        Function2<TLeft, TOtherLeftIn, TOtherLeftOut> functionLeft,
-        Function2<TRight, TOtherRightIn, TOtherRightOut> functionRight,
-        Function<TLeft, TOtherLeftOut> failThis,
-        Function<TOtherLeftIn, TOtherLeftOut> failOther
-        // Function2<TLeft, TOtherRightIn, TOtherLeftOut> failLeftRightLeft,
-        // Function2<TRight, TOtherLeftIn, TOtherLeftOut> failRightLeftLeft
-    ) throws UnexpectedNeitherException {
-        if (other instanceof Left<TOtherLeftIn, TOtherRightIn> left) {
-            return new Left<TOtherLeftOut, TOtherRightOut>(functionLeft.apply(value, left.value));
-        } else if (other instanceof Right<TOtherLeftIn, TOtherRightIn> right) {
-            return new Left<TOtherLeftOut, TOtherRightOut>(failThis.apply(value));
+    public <TOtherLeft, TOtherRight, TLeftOut, TRightOut> Either<TLeftOut, TRightOut> mergeFailToLeft(
+        Either<TOtherLeft, TOtherRight> other,
+        Function2<TLeft, TOtherLeft, TLeftOut> functionMergeLeft,
+        Function2<TRight, TOtherRight, TRightOut> functionMergeRight,
+        Function<TLeft, TLeftOut> transformThis,
+        Function<TOtherLeft, TLeftOut> transformOther
+    ) {
+        if (other instanceof Left<TOtherLeft, TOtherRight> left) {
+            return new Left<TLeftOut, TRightOut>(functionMergeLeft.apply(value, left.value));
+        } else if (other instanceof Right<TOtherLeft, TOtherRight> right) {
+            return new Left<TLeftOut, TRightOut>(transformThis.apply(value));
         } else {
             throw new UnexpectedNeitherException();
         }
     }
 
     @Override
-    public <TOtherLeftIn, TOtherRightIn, TOtherLeftOut, TOtherRightOut> Either<TOtherLeftOut, TOtherRightOut> mergeFailRight(
-        Either<TOtherLeftIn, TOtherRightIn> other,
-        Function2<TLeft, TOtherLeftIn, TOtherLeftOut> functionLeft,
-        Function2<TRight, TOtherRightIn, TOtherRightOut> functionRight,
-        Function<TOtherRightIn, TOtherRightOut> failOther,
-        Function<TRight, TOtherRightOut> failThis
-        // Function2<TLeft, TOtherRightIn, TOtherRightOut> failLeftRightRight,
-        // Function2<TRight, TOtherLeftIn, TOtherRightOut> failRightLeftRight
-    ) throws UnexpectedNeitherException {
-        if (other instanceof Left<TOtherLeftIn, TOtherRightIn> left) {
-            return new Left<TOtherLeftOut, TOtherRightOut>(functionLeft.apply(value, left.value));
-        } else if (other instanceof Right<TOtherLeftIn, TOtherRightIn> right) {
-            return new Right<TOtherLeftOut, TOtherRightOut>(failOther.apply(right.getValue()));
+    public <TOtherLeft, TOtherRight, TLeftOut, TRightOut> Either<TLeftOut, TRightOut> mergeFailToRight(
+        Either<TOtherLeft, TOtherRight> other,
+        Function2<TLeft, TOtherLeft, TLeftOut> functionLeft,
+        Function2<TRight, TOtherRight, TRightOut> functionRight,
+        Function<TOtherRight, TRightOut> failOther,
+        Function<TRight, TRightOut> failThis
+    ) {
+        if (other instanceof Left<TOtherLeft, TOtherRight> left) {
+            return new Left<TLeftOut, TRightOut>(functionLeft.apply(value, left.value));
+        } else if (other instanceof Right<TOtherLeft, TOtherRight> right) {
+            return new Right<TLeftOut, TRightOut>(failOther.apply(right.getValue()));
         } else {
             throw new UnexpectedNeitherException();
         }

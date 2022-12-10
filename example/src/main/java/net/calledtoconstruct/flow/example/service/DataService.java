@@ -21,11 +21,11 @@ public class DataService {
 
     public Either<List<String>, String> get() {
         try {
-            return new Left<List<String>, String>(dataRepository
+            final var rows = dataRepository
                 .findAll()
                 .stream()
-                .map(flowData -> flowData.name).toList()
-            );
+                .map(flowData -> flowData.name).toList();
+            return new Left<List<String>, String>(rows);
         } catch (final DataAccessException exception) {
             return new Right<List<String>, String>(exception.getMessage());
         }
@@ -33,9 +33,8 @@ public class DataService {
 
     public Either<Long, String> count() {
         try {
-            return new Left<Long, String>(dataRepository
-                .count()
-            );
+            final var countAll = dataRepository.count();
+            return new Left<Long, String>(countAll);
         } catch (final DataAccessException exception) {
             return new Right<Long, String>(exception.getMessage());
         }

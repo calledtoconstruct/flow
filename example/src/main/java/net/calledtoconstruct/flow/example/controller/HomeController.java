@@ -14,8 +14,6 @@ import net.calledtoconstruct.Either;
 import net.calledtoconstruct.Tuple1;
 import net.calledtoconstruct.Tuple2;
 import net.calledtoconstruct.Tuple3;
-import net.calledtoconstruct.Tuple4;
-import net.calledtoconstruct.UnexpectedNeitherException;
 import net.calledtoconstruct.flow.example.service.DataService;
 
 @Controller
@@ -49,7 +47,7 @@ public class HomeController {
             final var titleAndDate = TITLE
                 .push(Date.from(instant));
             final var result = dataFuture.get()
-                .mergeFailRight(
+                .mergeFailToRight(
                     countFuture.get(),
                     (data, count) -> new Tuple2<>(data, count),
                     (dataError, countError) -> dataError,
@@ -61,8 +59,8 @@ public class HomeController {
                 .onLeftSupply(() -> "index")
                 .onRightAccept(message -> model.addAttribute("message", message))
                 .onRightSupply(() -> "error");
-            return Either.coalesce(result, "unexpected");
-        } catch (final InterruptedException | ExecutionException | UnexpectedNeitherException exception) {
+            return Either.coalesce(result);
+        } catch (final InterruptedException | ExecutionException exception) {
             return "error";
         }
     }
