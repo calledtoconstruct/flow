@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <title th:text="${title}"></title>
+        <script src="http://localhost:35729/livereload.js"></script>
+    </head>
+    <body>
+        <div th:replace="~{./fragments/layout :: header}"></div>
+        <h3>Messages</h3>
+        <ul th:each="message : ${messages}">
+            <li th:text="${message}"></li>
+        </ul>
+        <div th:replace="~{./fragments/layout :: footer}"></div>
+    </body>
+</html>
