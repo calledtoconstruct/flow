@@ -12,7 +12,7 @@
 
 	<groupId>net.calledtoconstruct.flow</groupId>
 	<artifactId>example</artifactId>
-	<version>1.1</version>
+	<version>1.2</version>
 	<name>example</name>
 	<description>Examples for using Flow classes</description>
 
@@ -68,7 +68,7 @@
 		<dependency>
 			<groupId>net.calledtoconstruct</groupId>
 			<artifactId>flow</artifactId>
-			<version>1.1</version>
+			<version>1.2</version>
 		</dependency>
 	</dependencies>
 
