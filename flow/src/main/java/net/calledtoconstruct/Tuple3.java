@@ -18,7 +18,7 @@ public class Tuple3<T1, T2, T3> implements Tuple {
      * A function that returns a new {@link Tuple4} containing 
      * the values of this instance plus the supplied {@code value}.
      * 
-     * @param <T> The type of {@code value} being added.
+     * @param <T4> The type of {@code value} being added.
      * @param value A value to be added.
      * @return An instance of {@link Tuple4}
      */
@@ -50,7 +50,7 @@ public class Tuple3<T1, T2, T3> implements Tuple {
      * A function that returns a new {@link Tuple4} containing 
      * the supplied {@code value} plus the values of this instance.
      * 
-     * @param <T> The type of {@code value} being added.
+     * @param <T4> The type of {@code value} being added.
      * @param value A value to be added.
      * @return An instance of {@link Tuple4}
      */

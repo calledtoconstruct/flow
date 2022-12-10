@@ -29,7 +29,7 @@ public interface Either<TLeft, TRight> {
     Either<TLeft, TRight> onLeftAccept(Consumer<TLeft> consumer);
 
     /**
-     * Given that the existing {@link Either} is of type {@link Left}, the {@code onLeftSupply} invokes {@link supplier} which returns
+     * Given that the existing {@link Either} is of type {@link Left}, the {@code onLeftSupply} invokes {@code supplier} which returns
      * a value of type {@code TOther}.  A new {@link Left} instance is returned as type {@link Either} containing the supplied
      * value of type {@code TOther}.  When the {@link Either} is of type {@link Right}, the {@code supplier} is not invoked, and the same
      * instance is returned.
