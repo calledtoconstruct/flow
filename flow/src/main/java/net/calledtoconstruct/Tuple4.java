@@ -16,10 +16,22 @@ public class Tuple4<T1, T2, T3, T4> implements Tuple {
         this.fourthValue = fourthValue;
     }
 
+    /**
+     * A function that returns a new instance of {@link Tuple3} containing the
+     * first three values from this instance.
+     * 
+     * @return A {@link Tuple3} containing the first three values from this instance.
+     */
     public Tuple3<T1, T2, T3> pop() {
         return new Tuple3<>(firstValue, secondValue, thirdValue);
     }
 
+    /**
+     * A function that returns a new instance of {@link Tuple3} containing the
+     * last three values from this instance.
+     * 
+     * @return A {@link Tuple3} containing the last three values from this instance.
+     */
     public Tuple3<T2, T3, T4> shift() {
         return new Tuple3<>(secondValue, thirdValue, fourthValue);
     }
@@ -44,18 +56,38 @@ public class Tuple4<T1, T2, T3, T4> implements Tuple {
         return Optional.empty();
     }
 
+    /**
+     * A function that returns the first value from this instance.
+     * 
+     * @return A value of type {@code T1}
+     */
     public T1 getFirst() {
         return firstValue;
     }
 
+    /**
+     * A function that returns the second value from this instance.
+     * 
+     * @return A value of type {@code T2}
+     */
     public T2 getSecond() {
         return secondValue;
     }
 
+    /**
+     * A function that returns the third value from this instance.
+     * 
+     * @return A value of type {@code T3}
+     */
     public T3 getThird() {
         return thirdValue;
     }
 
+    /**
+     * A function that returns the fourth value from this instance.
+     * 
+     * @return A value of type {@code T4}
+     */
     public T4 getFourth() {
         return fourthValue;
     }
