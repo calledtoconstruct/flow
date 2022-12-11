@@ -17,6 +17,7 @@ import net.calledtoconstruct.Right;
 import net.calledtoconstruct.Tuple1;
 import net.calledtoconstruct.Tuple2;
 import net.calledtoconstruct.Tuple3;
+import net.calledtoconstruct.flow.example.entity.FlowData;
 import net.calledtoconstruct.flow.example.service.DataService;
 import net.calledtoconstruct.flow.example.service.LongRunningFunctions;
 
@@ -69,8 +70,27 @@ public class HomeController {
         }
     }
 
+    private void populateTimedModel(final Model model, Tuple3<List<FlowData>, Long, Long> dataCountAndDuration) {
+        model.addAttribute("title", "Get Timed");
+        model.addAttribute("rows", dataCountAndDuration.getFirst());
+        model.addAttribute("count", dataCountAndDuration.getSecond());
+        model.addAttribute("duration", dataCountAndDuration.getThird());
+    }
+    
+    @GetMapping("/timed")
+    public String getTimed(Model model) {
+        final var result = dataService.getDataAndCountTimed()
+            .onLeftAccept(dataCountAndDuration -> populateTimedModel(model, dataCountAndDuration))
+            .onLeftSupply(() -> "timed")
+            .onRightAccept(message -> model.addAttribute("message", message))
+            .onRightSupply(() -> "error");
+        return Either.coalesce(result);
+    }
+
     @GetMapping("/lrf")
     public String executeLongRunningFunctions(Model model) throws InterruptedException, ExecutionException {
+        model.addAttribute("title", "Long Running Functions");
+
         final var log = new ConcurrentLinkedQueue<>();
 
         final var first = CompletableFuture.supplyAsync(

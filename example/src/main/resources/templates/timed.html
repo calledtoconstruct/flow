@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title th:text="${title}"></title>
+        <script src="http://localhost:35729/livereload.js"></script>
+    </head>
+    <body>
+        <div th:replace="~{./fragments/layout :: header}"></div>
+        <table>
+            <tr th:each="flowData : ${rows}">
+                <td th:text="${flowData.id}"></td>
+                <td th:text="${flowData.name}"></td>
+                <td th:text="${flowData.description}"></td>
+            </tr>
+        </table>
+        <div>
+            <span>Count: </span> 
+            <span th:text="${count}"></span>
+        </div>
+        <div>
+            <span>Duration: </span> 
+            <span th:text="${duration}"></span>
+        </div>
+        <div th:replace="~{./fragments/layout :: footer}"></div>
+    </body>
+</html>
