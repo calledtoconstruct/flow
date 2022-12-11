@@ -129,8 +129,8 @@ public class Right<TLeft, TRight> implements Either<TLeft, TRight> {
         Either<TOtherLeft, TOtherRight> other,
         Function2<TLeft, TOtherLeft, TLeftOut> functionMergeLeft,
         Function2<TRight, TOtherRight, TRightOut> functionMergeRight,
-        Function<TOtherRight, TRightOut> transformOther,
-        Function<TRight, TRightOut> transformThis
+        Function<TRight, TRightOut> transformThis,
+        Function<TOtherRight, TRightOut> transformOther
     ) {
         if (other instanceof Right<TOtherLeft, TOtherRight> right) {
             return new Right<TLeftOut, TRightOut>(functionMergeRight.apply(value, right.value));
