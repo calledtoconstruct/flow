@@ -129,13 +129,13 @@ public class Left<TLeft, TRight> implements Either<TLeft, TRight> {
         Either<TOtherLeft, TOtherRight> other,
         Function2<TLeft, TOtherLeft, TLeftOut> functionLeft,
         Function2<TRight, TOtherRight, TRightOut> functionRight,
-        Function<TOtherRight, TRightOut> failOther,
-        Function<TRight, TRightOut> failThis
+        Function<TRight, TRightOut> transformThis,
+        Function<TOtherRight, TRightOut> transformOther
     ) {
         if (other instanceof Left<TOtherLeft, TOtherRight> left) {
             return new Left<TLeftOut, TRightOut>(functionLeft.apply(value, left.value));
         } else if (other instanceof Right<TOtherLeft, TOtherRight> right) {
-            return new Right<TLeftOut, TRightOut>(failOther.apply(right.getValue()));
+            return new Right<TLeftOut, TRightOut>(transformOther.apply(right.getValue()));
         } else {
             throw new UnexpectedNeitherException();
         }

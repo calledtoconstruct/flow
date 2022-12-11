@@ -133,16 +133,16 @@ public interface Either<TLeft, TRight> {
      * {@code TLeftOut} effectively merging the two left values.
      * @param functionMergeRight A function which takes values of type {@code TRight} and {@code TOtherRight} and produces a value of type
      * {@code TRightOut} effectively merging the two right values.
-     * @param transformThis A function which takes a value of {@code TRight} and transforms the value to {@code TRightOut}.
      * @param transformOther A function which takes a value of {@code TOtherRight} and transforms the value to {@code TRightOut}.
+     * @param transformThis A function which takes a value of {@code TRight} and transforms the value to {@code TRightOut}.
      * @return An instance of type {@link Left} or {@link Right} as {@link Either} with value types {@code TLeftOut} and {@code TRightOut} based on the above rules.
      */
     <TOtherLeft, TOtherRight, TLeftOut, TRightOut> Either<TLeftOut, TRightOut> mergeFailToRight(
         Either<TOtherLeft, TOtherRight> other,
         Function2<TLeft, TOtherLeft, TLeftOut> functionMergeLeft,
         Function2<TRight, TOtherRight, TRightOut> functionMergeRight,
-        Function<TOtherRight, TRightOut> transformOther,
-        Function<TRight, TRightOut> transformThis
+        Function<TRight, TRightOut> transformThis,
+        Function<TOtherRight, TRightOut> transformOther
     );
 
     /**
