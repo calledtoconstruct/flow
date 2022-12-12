@@ -4,7 +4,7 @@
 
 A collection of potentially useful classes for streamlining the process flow of Java applications.
 
-## [Either](https://github.com/calledtoconstruct/flow/blob/main/flow/src/main/java/net/calledtoconstruct/Either.java)
+## [Either](/calledtoconstruct/flow/blob/main/flow/src/main/java/net/calledtoconstruct/Either.java)
 
 ...
 
@@ -27,19 +27,19 @@ A collection of potentially useful classes for streamlining the process flow of 
     }
 ```
 
-## [Tuple](https://github.com/calledtoconstruct/flow/blob/main/flow/src/main/java/net/calledtoconstruct/Tuple.java)
+## [Tuple](/calledtoconstruct/flow/blob/main/flow/src/main/java/net/calledtoconstruct/Tuple.java)
 
 A collection of one or more values of descrete data types.  In contrast to Array or List which require elements of the collection to share the same data type, the Tuple interface and implementations, allow for elements of different data types.  However, the trade-off is that Tuple can only support a small number of elements.  This library currently supports up-to four (4) elements.
 
 Implementations: 
 
-* [Tuple1](https://github.com/calledtoconstruct/flow/blob/main/flow/src/main/java/net/calledtoconstruct/Tuple1.java) - Example: new Tuple1\<String\>
+* [Tuple1](/calledtoconstruct/flow/blob/main/flow/src/main/java/net/calledtoconstruct/Tuple1.java) - Example: new Tuple1\<String\>
 
-* [Tuple2](https://github.com/calledtoconstruct/flow/blob/main/flow/src/main/java/net/calledtoconstruct/Tuple2.java) - Example: new Tuple2\<String, Integer\>
+* [Tuple2](/calledtoconstruct/flow/blob/main/flow/src/main/java/net/calledtoconstruct/Tuple2.java) - Example: new Tuple2\<String, Integer\>
 
-* [Tuple3](https://github.com/calledtoconstruct/flow/blob/main/flow/src/main/java/net/calledtoconstruct/Tuple3.java) - Example: new Tuple3\<Long, String, String\>
+* [Tuple3](/calledtoconstruct/flow/blob/main/flow/src/main/java/net/calledtoconstruct/Tuple3.java) - Example: new Tuple3\<Long, String, String\>
 
-* [Tuple4](https://github.com/calledtoconstruct/flow/blob/main/flow/src/main/java/net/calledtoconstruct/Tuple4.java) - Example: new Tuple4\<MyClass, Long, Long, String\>
+* [Tuple4](/calledtoconstruct/flow/blob/main/flow/src/main/java/net/calledtoconstruct/Tuple4.java) - Example: new Tuple4\<MyClass, Long, Long, String\>
 
 ...
 
