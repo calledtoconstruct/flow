@@ -4,7 +4,7 @@
 
 A collection of potentially useful classes for streamlining the process flow of Java applications.
 
-## [Either](/calledtoconstruct/flow/blob/main/flow/src/main/java/net/calledtoconstruct/Either.java)
+## [Either](/calledtoconstruct/flow/main/flow/src/main/java/net/calledtoconstruct/Either.java)
 
 ...
 
