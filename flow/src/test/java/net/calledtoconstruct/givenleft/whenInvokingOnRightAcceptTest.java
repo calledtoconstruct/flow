@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import net.calledtoconstruct.Either;
 import net.calledtoconstruct.Left;
 
-public class whenInvokingOnRightAcceptTest {
+public class WhenInvokingOnRightAcceptTest {
 
     private static final Random RANDOM = new Random();
     private static final int INPUT = RANDOM.nextInt();

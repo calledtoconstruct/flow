@@ -11,7 +11,7 @@ import net.calledtoconstruct.Either;
 import net.calledtoconstruct.Left;
 import net.calledtoconstruct.Right;
 
-public class whenInvokingAcceptAllTest {
+public class WhenInvokingAcceptAllTest {
 
     private final static Random RANDOM = new Random();
     private static final int FIRST = RANDOM.nextInt();

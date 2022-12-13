@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import net.calledtoconstruct.Either;
 import net.calledtoconstruct.Left;
 
-public class whenInvokingMergeFailToRightTest {
+public class WhenInvokingMergeFailToRightTest {
 
     private final static Random random = new Random();
     private final static long LEFT_VALUE = random.nextLong();

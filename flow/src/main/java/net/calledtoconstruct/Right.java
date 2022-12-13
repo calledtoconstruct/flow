@@ -2,6 +2,7 @@ package net.calledtoconstruct;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -23,13 +24,13 @@ public class Right<TLeft, TRight> implements Either<TLeft, TRight> {
 
     @Override
     public <TOther> Either<TOther, TRight> onLeftApply(Function<TLeft, TOther> function) {
-        return new Right<TOther, TRight>(value);
+        return new Right<>(value);
     }
 
     @Override
     public <TOther> Either<TLeft, TOther> onRightApply(Function<TRight, TOther> function) {
         final TOther other = function.apply(value);
-        return new Right<TLeft, TOther>(other);
+        return new Right<>(other);
     }
 
     @Override
@@ -77,7 +78,7 @@ public class Right<TLeft, TRight> implements Either<TLeft, TRight> {
     public static <TLeft, TRight> boolean acceptAll(Consumer<List<TRight>> consumer, Either<TLeft, TRight>... input) {
         final var values = Arrays.stream(input)
             .map(either -> (either instanceof Right<TLeft, TRight> right) ? right.getValue() : null)
-            .filter(value -> value != null)
+            .filter(Objects::nonNull)
             .collect(Collectors.toList());
 
         if (values.size() == input.length) {
@@ -116,9 +117,9 @@ public class Right<TLeft, TRight> implements Either<TLeft, TRight> {
         Function<TOtherLeft, TLeftOut> transformOther
     ) {
         if (other instanceof Right<TOtherLeft, TOtherRight> right) {
-            return new Right<TLeftOut, TRightOut>(functionMergeRight.apply(value, right.value));
+            return new Right<>(functionMergeRight.apply(value, right.value));
         } else if (other instanceof Left<TOtherLeft, TOtherRight> left) {
-            return new Left<TLeftOut, TRightOut>(transformOther.apply(left.getValue()));
+            return new Left<>(transformOther.apply(left.getValue()));
         } else {
             throw new UnexpectedNeitherException();
         }
@@ -133,9 +134,9 @@ public class Right<TLeft, TRight> implements Either<TLeft, TRight> {
         Function<TOtherRight, TRightOut> transformOther
     ) {
         if (other instanceof Right<TOtherLeft, TOtherRight> right) {
-            return new Right<TLeftOut, TRightOut>(functionMergeRight.apply(value, right.value));
-        } else if (other instanceof Left<TOtherLeft, TOtherRight> left) {
-            return new Right<TLeftOut, TRightOut>(transformThis.apply(value));
+            return new Right<>(functionMergeRight.apply(value, right.value));
+        } else if (other instanceof Left<TOtherLeft, TOtherRight>) {
+            return new Right<>(transformThis.apply(value));
         } else {
             throw new UnexpectedNeitherException();
         }

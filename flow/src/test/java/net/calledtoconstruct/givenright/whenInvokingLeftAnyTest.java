@@ -11,7 +11,7 @@ import net.calledtoconstruct.Either;
 import net.calledtoconstruct.Left;
 import net.calledtoconstruct.Right;
 
-public class whenInvokingLeftAnyTest {
+public class WhenInvokingLeftAnyTest {
 
     private final static Random RANDOM = new Random();
     private final static long INPUT = RANDOM.nextLong();
