@@ -28,18 +28,18 @@ public class DataService {
                 .findAll()
                 .stream()
                 .map(flowData -> flowData.name).toList();
-            return new Left<List<String>, String>(rows);
+            return new Left<>(rows);
         } catch (final DataAccessException exception) {
-            return new Right<List<String>, String>(exception.getMessage());
+            return new Right<>(exception.getMessage());
         }
     }
 
     public Either<Long, String> count() {
         try {
             final var countAll = dataRepository.count();
-            return new Left<Long, String>(countAll);
+            return new Left<>(countAll);
         } catch (final DataAccessException exception) {
-            return new Right<Long, String>(exception.getMessage());
+            return new Right<>(exception.getMessage());
         }
     }
 
@@ -59,4 +59,5 @@ public class DataService {
             return new Right<>(exception.getMessage());
         }
     }
+    
 }

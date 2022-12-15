@@ -4,7 +4,6 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutionException;
 
 import org.springframework.stereotype.Controller;
@@ -12,19 +11,28 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import net.calledtoconstruct.Either;
-import net.calledtoconstruct.Left;
-import net.calledtoconstruct.Right;
 import net.calledtoconstruct.Tuple1;
 import net.calledtoconstruct.Tuple2;
 import net.calledtoconstruct.Tuple3;
-import net.calledtoconstruct.flow.example.entity.FlowData;
 import net.calledtoconstruct.flow.example.service.DataService;
-import net.calledtoconstruct.flow.example.service.LongRunningFunctions;
 
 @Controller
 public class HomeController {
 
-    private final static Tuple1<String> TITLE = new Tuple1<>("Flow Sample Application");
+    private final class PageName {
+        public static final String INDEX = "index";
+        public static final String ERROR = "error";
+    }
+
+    private final class AttributeName {
+        public static final String MESSAGE = "message";
+        private static final String TITLE = "title";
+        private static final String DATE = "date";
+        private static final String ROWS = "rows";
+        private static final String COUNT = "count";
+    }
+
+    private static final Tuple1<String> TITLE = new Tuple1<>("Flow Sample Application");
 
     private final DataService dataService;
 
@@ -36,111 +44,40 @@ public class HomeController {
         final Model model,
         final Tuple3<String, Date, Tuple2<List<String>, Long>> data
     ) {
-        model.addAttribute("title", data.getFirst());
-        model.addAttribute("date", data.getSecond());
         final var rowsAndCount = data.getThird();
-        model.addAttribute("rows", rowsAndCount.getFirst());
-        model.addAttribute("count", rowsAndCount.getSecond());
+        model.addAttribute(AttributeName.TITLE, data.getFirst());
+        model.addAttribute(AttributeName.DATE, data.getSecond());
+        model.addAttribute(AttributeName.ROWS, rowsAndCount.getFirst());
+        model.addAttribute(AttributeName.COUNT, rowsAndCount.getSecond());
     }
     
     @GetMapping("/")
-    public String get(Model model) {
+    public String get(Model model) throws InterruptedException {
         try {
             final var dataFuture = CompletableFuture.supplyAsync(dataService::get);
             final var countFuture = CompletableFuture.supplyAsync(dataService::count);
-            final var instant = Instant.now();
-            final var titleAndDate = TITLE
-                .push(Date.from(instant));
+
+            final var instantNow = Instant.now();
+            final var currentDateAndTime = Date.from(instantNow);
+            final var titleAndDate = TITLE.push(currentDateAndTime);
+
             final var result = dataFuture.get()
                 .mergeFailToRight(
                     countFuture.get(),
-                    (data, count) -> new Tuple2<>(data, count),
+                    Tuple2::new,
                     (dataError, countError) -> dataError,
-                    (countError) -> countError,
-                    (dataError) -> dataError
+                    countError -> countError,
+                    dataError -> dataError
                 )
-                .onLeftApply(rows -> titleAndDate.push(rows))
+                .onLeftApply(titleAndDate::push)
                 .onLeftAccept(titleDateRowsAndCount -> populateModel(model, titleDateRowsAndCount))
-                .onLeftSupply(() -> "index")
-                .onRightAccept(message -> model.addAttribute("message", message))
-                .onRightSupply(() -> "error");
+                .onLeftSupply(() -> PageName.INDEX)
+                .onRightAccept(message -> model.addAttribute(AttributeName.MESSAGE, message))
+                .onRightSupply(() -> PageName.ERROR);
             return Either.coalesce(result);
-        } catch (final InterruptedException | ExecutionException exception) {
-            return "error";
+        } catch (final ExecutionException exception) {
+            return PageName.ERROR;
         }
-    }
-
-    private void populateTimedModel(final Model model, Tuple3<List<FlowData>, Long, Long> dataCountAndDuration) {
-        model.addAttribute("title", "Get Timed");
-        model.addAttribute("rows", dataCountAndDuration.getFirst());
-        model.addAttribute("count", dataCountAndDuration.getSecond());
-        model.addAttribute("duration", dataCountAndDuration.getThird());
-    }
-    
-    @GetMapping("/timed")
-    public String getTimed(Model model) {
-        final var result = dataService.getDataAndCountTimed()
-            .onLeftAccept(dataCountAndDuration -> populateTimedModel(model, dataCountAndDuration))
-            .onLeftSupply(() -> "timed")
-            .onRightAccept(message -> model.addAttribute("message", message))
-            .onRightSupply(() -> "error");
-        return Either.coalesce(result);
-    }
-
-    @GetMapping("/lrf")
-    public String executeLongRunningFunctions(Model model) throws InterruptedException, ExecutionException {
-        model.addAttribute("title", "Long Running Functions");
-
-        final var log = new ConcurrentLinkedQueue<>();
-
-        final var first = CompletableFuture.supplyAsync(
-            () -> LongRunningFunctions.longRunningFunction(20)
-                .onLeftAccept(number -> log.add(String.format("Received number: %d", number)))
-                .onRightAccept(exception -> log.add("An exception occurred while attempting to sleep for 20."))
-        );
-        
-        final var second = CompletableFuture.supplyAsync(
-            () -> LongRunningFunctions.longRunningFunction(30)
-                .onLeftAccept(number -> log.add(String.format("Received number: %d", number)))
-                .onLeftApply(number -> number * 2)
-                .onLeftAccept(number -> log.add(String.format("Received number: %d", number)))
-        );
-        
-        final var third = CompletableFuture.supplyAsync(
-            () -> LongRunningFunctions.longRunningFunction(10)
-                .onLeftAccept(number -> log.add(String.format("Received number: %d", number)))
-        );
-
-        log.add("Waiting...");
-
-        CompletableFuture.allOf(first, second, third).get();
-        
-        log.add("The future is now");
-
-        final var firstResult = first.get();
-        final var secondResult = second.get();
-        final var thirdResult = third.get();
-
-        Left.acceptAll(
-            numbers -> log.add(numbers.toString()),
-            secondResult,
-            thirdResult
-        );
-
-        try {
-            final var exception = Right.any(firstResult, secondResult, thirdResult);
-            if (exception.isPresent()) {
-                throw exception.get();
-            }
-        } catch (InterruptedException exception) {
-            log.add("Caught interrupted exception");
-        } finally {
-            log.add("Concluded");
-        }
-
-        model.addAttribute("messages", log.toArray());
-
-        return "lrf";
     }
     
 }

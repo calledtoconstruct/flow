@@ -5,6 +5,9 @@ import net.calledtoconstruct.Left;
 import net.calledtoconstruct.Right;
 
 public class LongRunningFunctions {
+
+    private LongRunningFunctions() {}
+
     public static Either<Integer, InterruptedException> longRunningFunction(Integer sleep) {
         try {
             if (sleep != 20) {
@@ -12,9 +15,10 @@ public class LongRunningFunctions {
             } else {    
                 throw new InterruptedException();
             }
-        } catch (InterruptedException interruptedException) {
+        } catch (final InterruptedException interruptedException) {
             return new Right<>(interruptedException);
         }
         return new Left<>(sleep * 10);
     }
+
 }
