@@ -27,7 +27,7 @@ public class Tuple1<T1> implements Tuple {
      * @return An instance of {@link Tuple2}
      */
     public <T> Tuple2<T1, T> push(final T value) {
-        return new Tuple2<T1, T>(this.firstValue, value);
+        return new Tuple2<>(this.firstValue, value);
     }
 
     /**
@@ -39,7 +39,7 @@ public class Tuple1<T1> implements Tuple {
      * @return An instance of {@link Tuple2}
      */
     public <T> Tuple2<T, T1> unshift(final T value) {
-        return new Tuple2<T, T1>(value, this.firstValue);
+        return new Tuple2<>(value, this.firstValue);
     }
 
     @Override
