@@ -2,62 +2,64 @@ package net.calledtoconstruct;
 
 import java.util.Optional;
 
-public class Tuple4<T1, T2, T3, T4> implements Tuple {
+public class Tuple5<T1, T2, T3, T4, T5> implements Tuple {
 
     private final T1 firstValue;
     private final T2 secondValue;
     private final T3 thirdValue;
     private final T4 fourthValue;
+    private final T5 fifthValue;
 
-    public Tuple4(T1 firstValue, T2 secondValue, T3 thirdValue, T4 fourthValue) {
+    public Tuple5(T1 firstValue, T2 secondValue, T3 thirdValue, T4 fourthValue, T5 fifthValue) {
         this.firstValue = firstValue;
         this.secondValue = secondValue;
         this.thirdValue = thirdValue;
         this.fourthValue = fourthValue;
+        this.fifthValue = fifthValue;
     }
 
     /**
-     * A function that returns a new {@link Tuple5} containing 
+     * A function that returns a new {@link Tuple6} containing 
      * the values of this instance plus the supplied {@code value}.
      * 
-     * @param <T5> The type of {@code value} being added.
+     * @param <T6> The type of {@code value} being added.
      * @param value A value to be added.
-     * @return An instance of {@link Tuple5}
+     * @return An instance of {@link Tuple6}
      */
-    public <T5> Tuple5<T1, T2, T3, T4, T5> push(T5 value) {
-        return new Tuple5<>(firstValue, secondValue, thirdValue, fourthValue, value);
+    public <T6> Tuple6<T1, T2, T3, T4, T5, T6> push(T6 value) {
+        return new Tuple6<>(firstValue, secondValue, thirdValue, fourthValue, fifthValue, value);
     }
 
     /**
-     * A function that returns a new instance of {@link Tuple3} containing the
-     * first three values from this instance.
+     * A function that returns a new instance of {@link Tuple4} containing the
+     * first four values from this instance.
      * 
-     * @return A {@link Tuple3} containing the first three values from this instance.
+     * @return A {@link Tuple4} containing the first four values from this instance.
      */
-    public Tuple3<T1, T2, T3> pop() {
-        return new Tuple3<>(firstValue, secondValue, thirdValue);
+    public Tuple4<T1, T2, T3, T4> pop() {
+        return new Tuple4<>(firstValue, secondValue, thirdValue, fourthValue);
     }
 
     /**
-     * A function that returns a new instance of {@link Tuple3} containing the
-     * last three values from this instance.
+     * A function that returns a new instance of {@link Tuple4} containing the
+     * last four values from this instance.
      * 
-     * @return A {@link Tuple3} containing the last three values from this instance.
+     * @return A {@link Tuple4} containing the last four values from this instance.
      */
-    public Tuple3<T2, T3, T4> shift() {
-        return new Tuple3<>(secondValue, thirdValue, fourthValue);
+    public Tuple4<T2, T3, T4, T5> shift() {
+        return new Tuple4<>(secondValue, thirdValue, fourthValue, fifthValue);
     }
 
     /**
-     * A function that returns a new {@link Tuple5} containing 
+     * A function that returns a new {@link Tuple6} containing 
      * the supplied {@code value} plus the values of this instance.
      * 
-     * @param <T5> The type of {@code value} being added.
+     * @param <T6> The type of {@code value} being added.
      * @param value A value to be added.
-     * @return An instance of {@link Tuple5}
+     * @return An instance of {@link Tuple6}
      */
-    public <T5> Tuple5<T5, T1, T2, T3, T4> unshift(T5 value) {
-        return new Tuple5<>(value, firstValue, secondValue, thirdValue, fourthValue);
+    public <T6> Tuple6<T6, T1, T2, T3, T4, T5> unshift(T6 value) {
+        return new Tuple6<>(value, firstValue, secondValue, thirdValue, fourthValue, fifthValue);
     }
 
     @Override
@@ -114,6 +116,15 @@ public class Tuple4<T1, T2, T3, T4> implements Tuple {
      */
     public T4 getFourth() {
         return fourthValue;
+    }
+
+    /**
+     * A function that returns the fifth value from this instance.
+     * 
+     * @return A value of type {@code T5}
+     */
+    public T5 getFifth() {
+        return fifthValue;
     }
 
 }
