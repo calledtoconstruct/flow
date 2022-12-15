@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import net.calledtoconstruct.Either;
 import net.calledtoconstruct.Right;
 
-public class WhenInvokingRightAnyTest {
+class WhenInvokingRightAnyTest {
 
     private final static Random RANDOM = new Random();
     private final static long INPUT = RANDOM.nextLong();
@@ -20,17 +20,17 @@ public class WhenInvokingRightAnyTest {
     private Optional<Long> result;
     
     @BeforeEach
-    public void invokeAny() {
+    void invokeAny() {
         result = Right.any(systemUnderTest);
     }
 
     @Test
-    public void thenResultIsPresent() {
+    void thenResultIsPresent() {
         Assertions.assertTrue(result.isPresent());
     }
 
     @Test
-    public void thenResultIsCorrect() {
+    void thenResultIsCorrect() {
         if (result.isPresent()) {
             Assertions.assertEquals(INPUT, result.get());
         }

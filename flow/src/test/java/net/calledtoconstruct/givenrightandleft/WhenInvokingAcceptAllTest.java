@@ -11,7 +11,7 @@ import net.calledtoconstruct.Either;
 import net.calledtoconstruct.Left;
 import net.calledtoconstruct.Right;
 
-public class WhenInvokingAcceptAllTest {
+class WhenInvokingAcceptAllTest {
 
     private final static Random RANDOM = new Random();
     private static final int FIRST = RANDOM.nextInt();
@@ -35,7 +35,7 @@ public class WhenInvokingAcceptAllTest {
     private boolean rightResult;
     
     @BeforeEach
-    public void invokeAcceptAll() {
+    void invokeAcceptAll() {
         leftResult = Left.acceptAll(this::acceptLeft, first, second);
         rightResult = Right.acceptAll(this::acceptRight, first, second);
     }

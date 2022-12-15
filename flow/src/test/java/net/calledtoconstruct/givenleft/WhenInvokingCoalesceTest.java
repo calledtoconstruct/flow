@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import net.calledtoconstruct.Either;
 import net.calledtoconstruct.Left;
 
-public class WhenInvokingCoalesceTest {
+class WhenInvokingCoalesceTest {
 
     private static final Random RANDOM = new Random();
     private static final int INPUT = RANDOM.nextInt();
@@ -19,12 +19,12 @@ public class WhenInvokingCoalesceTest {
     private Integer result;
     
     @BeforeEach
-    public void invokeCoalesce() {
+    void invokeCoalesce() {
         result = Either.coalesce(systemUnderTest);
     }
 
     @Test
-    public void thenResultIsCorrect() {
+    void thenResultIsCorrect() {
         Assertions.assertEquals(INPUT, result);
     }
 }

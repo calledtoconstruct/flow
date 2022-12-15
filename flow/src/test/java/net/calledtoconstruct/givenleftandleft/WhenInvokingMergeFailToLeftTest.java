@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import net.calledtoconstruct.Either;
 import net.calledtoconstruct.Left;
 
-public class WhenInvokingMergeFailToLeftTest {
+class WhenInvokingMergeFailToLeftTest {
 
     private final static Random random = new Random();
     private final static long LEFT_VALUE = random.nextLong();
@@ -47,7 +47,7 @@ public class WhenInvokingMergeFailToLeftTest {
     }
     
     @BeforeEach
-    public void invokeMergeFailToLeft() {
+    void invokeMergeFailToLeft() {
         result = left.mergeFailToLeft(
             other,
             this::functionMergeLeft,
@@ -58,32 +58,32 @@ public class WhenInvokingMergeFailToLeftTest {
     }
 
     @Test
-    public void thenFunctionMergeLeftWasCalled() {
+    void thenFunctionMergeLeftWasCalled() {
         Assertions.assertTrue(functionMergeLeftWasCalled);
     }
 
     @Test
-    public void thenFunctionMergeRightWasNotCalled() {
+    void thenFunctionMergeRightWasNotCalled() {
         Assertions.assertFalse(functionMergeRightWasCalled);
     }
 
     @Test
-    public void thenTransformThisWasNotCalled() {
+    void thenTransformThisWasNotCalled() {
         Assertions.assertFalse(transformThisWasCalled);
     }
 
     @Test
-    public void thenTransformOtherWasNotCalled() {
+    void thenTransformOtherWasNotCalled() {
         Assertions.assertFalse(transformOtherWasCalled);
     }
 
     @Test
-    public void thenResultIsInstanceOfLeft() {
+    void thenResultIsInstanceOfLeft() {
         Assertions.assertInstanceOf(Left.class, result);
     }
 
     @Test
-    public void thenGetProducesCorrectValue() {
+    void thenGetProducesCorrectValue() {
         if (result instanceof Left<String, String> left) {
             final var value = left.getValue();
             Assertions.assertEquals(OUTPUT, value);

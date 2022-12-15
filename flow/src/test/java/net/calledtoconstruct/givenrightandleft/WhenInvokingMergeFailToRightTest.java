@@ -10,7 +10,7 @@ import net.calledtoconstruct.Either;
 import net.calledtoconstruct.Left;
 import net.calledtoconstruct.Right;
 
-public class WhenInvokingMergeFailToRightTest {
+class WhenInvokingMergeFailToRightTest {
 
     private final static Random random = new Random();
     private final static long LEFT_VALUE = random.nextLong();
@@ -48,7 +48,7 @@ public class WhenInvokingMergeFailToRightTest {
     }
     
     @BeforeEach
-    public void invokeMergeFailToRight() {
+    void invokeMergeFailToRight() {
         result = right.mergeFailToRight(
             left,
             this::functionMergeLeft,
@@ -59,32 +59,32 @@ public class WhenInvokingMergeFailToRightTest {
     }
 
     @Test
-    public void thenFunctionMergeLeftWasNotCalled() {
+    void thenFunctionMergeLeftWasNotCalled() {
         Assertions.assertFalse(functionMergeLeftWasCalled);
     }
 
     @Test
-    public void thenFunctionMergeRightWasNotCalled() {
+    void thenFunctionMergeRightWasNotCalled() {
         Assertions.assertFalse(functionMergeRightWasCalled);
     }
 
     @Test
-    public void thenTransformThisWasCalled() {
+    void thenTransformThisWasCalled() {
         Assertions.assertTrue(transformThisWasCalled);
     }
 
     @Test
-    public void thenTransformOtherWasNotCalled() {
+    void thenTransformOtherWasNotCalled() {
         Assertions.assertFalse(transformOtherWasCalled);
     }
 
     @Test
-    public void thenResultIsInstanceOfRight() {
+    void thenResultIsInstanceOfRight() {
         Assertions.assertInstanceOf(Right.class, result);
     }
 
     @Test
-    public void thenGetProducesCorrectValue() {
+    void thenGetProducesCorrectValue() {
         if (result instanceof Right<String, String> right) {
             final var value = right.getValue();
             Assertions.assertEquals(OUTPUT, value);

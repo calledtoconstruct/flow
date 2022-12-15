@@ -11,7 +11,7 @@ import net.calledtoconstruct.Either;
 import net.calledtoconstruct.Left;
 import net.calledtoconstruct.Right;
 
-public class WhenInvokingRightAnyTest {
+class WhenInvokingRightAnyTest {
 
     private final static Random RANDOM = new Random();
     private final static long INPUT = RANDOM.nextLong();
@@ -21,12 +21,12 @@ public class WhenInvokingRightAnyTest {
     private Optional<Integer> result;
     
     @BeforeEach
-    public void invokeAny() {
+    void invokeAny() {
         result = Right.any(systemUnderTest);
     }
 
     @Test
-    public void thenResultIsEmpty() {
+    void thenResultIsEmpty() {
         Assertions.assertTrue(result.isEmpty());
     }
     

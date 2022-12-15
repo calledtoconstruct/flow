@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import net.calledtoconstruct.Tuple1;
 import net.calledtoconstruct.Tuple8;
 
-public class WhenShiftingValuesTest {
+class WhenShiftingValuesTest {
     
     private static final Random RANDOM = new Random();
     private static final String FIRST_INPUT = String.format("%d", RANDOM.nextInt());
@@ -39,7 +39,7 @@ public class WhenShiftingValuesTest {
         .shift();
 
     @Test
-    public void thenResultIsCorrect() {
+    void thenResultIsCorrect() {
         Assertions.assertEquals(EIGHTH_INPUT, result.getFirst());
     }
 

@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import net.calledtoconstruct.Either;
 import net.calledtoconstruct.Right;
 
-public class WhenInvokingOnRightSupplyTest {
+class WhenInvokingOnRightSupplyTest {
 
     private static final Random RANDOM = new Random();
     private static final int INPUT = RANDOM.nextInt();
@@ -26,22 +26,22 @@ public class WhenInvokingOnRightSupplyTest {
     }
 
     @BeforeEach
-    public void invokeOnRightSupply() {
+    void invokeOnRightSupply() {
         onRightSupplyResult = systemUnderTest.onRightSupply(this::onRightSupply);
     }
 
     @Test
-    public void thenOnRightSupplyWasCalled() {
+    void thenOnRightSupplyWasCalled() {
         Assertions.assertTrue(onRightSupplyWasCalled);
     }
 
     @Test
-    public void thenResultIsInstanceOfRight() {
+    void thenResultIsInstanceOfRight() {
         Assertions.assertTrue(onRightSupplyResult instanceof Right);
     }
 
     @Test
-    public void thenGetReturnsSuppliedValue() {
+    void thenGetReturnsSuppliedValue() {
         if (onRightSupplyResult instanceof final Right<Boolean, String> right) {
             final String value = right.getValue();
             Assertions.assertEquals(SUPPLIED, value);

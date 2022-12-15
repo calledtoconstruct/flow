@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import net.calledtoconstruct.Either;
 import net.calledtoconstruct.Left;
 
-public class WhenInvokingOnLeftAcceptTest {
+class WhenInvokingOnLeftAcceptTest {
 
     private static final Random RANDOM = new Random();
     private static final int INPUT = RANDOM.nextInt();
@@ -26,29 +26,29 @@ public class WhenInvokingOnLeftAcceptTest {
     }
 
     @BeforeEach
-    public void invokeOnLeftAccept() {
+    void invokeOnLeftAccept() {
         onLeftAcceptResult = systemUnderTest.onLeftAccept(this::onLeftAccept);
     }
 
     @Test
-    public void thenOnLeftAcceptWasCalled() {
+    void thenOnLeftAcceptWasCalled() {
         Assertions.assertTrue(onLeftAcceptCalled);
     }
 
     @Test
-    public void thenResultIsInstanceOfLeft() {
+    void thenResultIsInstanceOfLeft() {
         Assertions.assertTrue(onLeftAcceptResult instanceof Left);
     }
 
     @Test
-    public void thenGetProducesCorrectValue() {
+    void thenGetProducesCorrectValue() {
         if (onLeftAcceptResult instanceof Left<Integer, Boolean> left) {
             Assertions.assertEquals(Integer.valueOf(INPUT), left.getValue());
         }
     }
 
     @Test
-    public void thenAcceptedValueIsCorrect() {
+    void thenAcceptedValueIsCorrect() {
         Assertions.assertEquals(INPUT, acceptedValue);
     }
     

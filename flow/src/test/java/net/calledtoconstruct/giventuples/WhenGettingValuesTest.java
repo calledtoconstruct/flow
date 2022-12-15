@@ -14,7 +14,7 @@ import net.calledtoconstruct.Tuple6;
 import net.calledtoconstruct.Tuple7;
 import net.calledtoconstruct.Tuple8;
 
-public class WhenGettingValuesTest {
+class WhenGettingValuesTest {
     
     private static final Random RANDOM = new Random();
     private static final String FIRST_INPUT = String.format("%d", RANDOM.nextInt());
@@ -87,25 +87,25 @@ public class WhenGettingValuesTest {
     );
 
     @Test
-    public void thenEighthIsCorrect() {
+    void thenEighthIsCorrect() {
         Assertions.assertEquals(EIGHTH_INPUT, tuple8.getEighth());
     }
 
     @Test
-    public void thenSeventhIsCorrect() {
+    void thenSeventhIsCorrect() {
         Assertions.assertEquals(SEVENTH_INPUT, tuple8.getSeventh());
         Assertions.assertEquals(SEVENTH_INPUT, tuple7.getSeventh());
     }
 
     @Test
-    public void thenSixthIsCorrect() {
+    void thenSixthIsCorrect() {
         Assertions.assertEquals(SIXTH_INPUT, tuple8.getSixth());
         Assertions.assertEquals(SIXTH_INPUT, tuple7.getSixth());
         Assertions.assertEquals(SIXTH_INPUT, tuple6.getSixth());
     }
 
     @Test
-    public void thenFifthIsCorrect() {
+    void thenFifthIsCorrect() {
         Assertions.assertEquals(FIFTH_INPUT, tuple8.getFifth());
         Assertions.assertEquals(FIFTH_INPUT, tuple7.getFifth());
         Assertions.assertEquals(FIFTH_INPUT, tuple6.getFifth());
@@ -113,7 +113,7 @@ public class WhenGettingValuesTest {
     }
 
     @Test
-    public void thenFourthIsCorrect() {
+    void thenFourthIsCorrect() {
         Assertions.assertEquals(FOURTH_INPUT, tuple8.getFourth());
         Assertions.assertEquals(FOURTH_INPUT, tuple7.getFourth());
         Assertions.assertEquals(FOURTH_INPUT, tuple6.getFourth());
@@ -122,7 +122,7 @@ public class WhenGettingValuesTest {
     }
 
     @Test
-    public void thenThirdIsCorrect() {
+    void thenThirdIsCorrect() {
         Assertions.assertEquals(THIRD_INPUT, tuple8.getThird());
         Assertions.assertEquals(THIRD_INPUT, tuple7.getThird());
         Assertions.assertEquals(THIRD_INPUT, tuple6.getThird());
@@ -132,7 +132,7 @@ public class WhenGettingValuesTest {
     }
 
     @Test
-    public void thenSecondIsCorrect() {
+    void thenSecondIsCorrect() {
         Assertions.assertEquals(SECOND_INPUT, tuple8.getSecond());
         Assertions.assertEquals(SECOND_INPUT, tuple7.getSecond());
         Assertions.assertEquals(SECOND_INPUT, tuple6.getSecond());
@@ -143,7 +143,7 @@ public class WhenGettingValuesTest {
     }
 
     @Test
-    public void thenFirstIsCorrect() {
+    void thenFirstIsCorrect() {
         Assertions.assertEquals(FIRST_INPUT, tuple8.getFirst());
         Assertions.assertEquals(FIRST_INPUT, tuple7.getFirst());
         Assertions.assertEquals(FIRST_INPUT, tuple6.getFirst());

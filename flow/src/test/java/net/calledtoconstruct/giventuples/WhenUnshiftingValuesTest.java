@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import net.calledtoconstruct.Tuple1;
 import net.calledtoconstruct.Tuple8;
 
-public class WhenUnshiftingValuesTest {
+class WhenUnshiftingValuesTest {
     
     private static final Random RANDOM = new Random();
     private static final int FIRST_INPUT = RANDOM.nextInt();
@@ -30,49 +30,49 @@ public class WhenUnshiftingValuesTest {
         .unshift(EIGHTH_INPUT);
         
     @Test
-    public void thenFirstValueIsCorrect() {
+    void thenFirstValueIsCorrect() {
         final var value = systemUnderTest.getFirst();
         Assertions.assertEquals(EIGHTH_INPUT, value);
     }
     
     @Test
-    public void thenSecondValueIsCorrect() {
+    void thenSecondValueIsCorrect() {
         final var value = systemUnderTest.getSecond();
         Assertions.assertEquals(SEVENTH_INPUT, value);
     }
     
     @Test
-    public void thenThirdValueIsCorrect() {
+    void thenThirdValueIsCorrect() {
         final var value = systemUnderTest.getThird();
         Assertions.assertEquals(SIXTH_INPUT, value);
     }
     
     @Test
-    public void thenFourthValueIsCorrect() {
+    void thenFourthValueIsCorrect() {
         final var value = systemUnderTest.getFourth();
         Assertions.assertEquals(FIFTH_INPUT, value);
     }
     
     @Test
-    public void thenFifthValueIsCorrect() {
+    void thenFifthValueIsCorrect() {
         final var value = systemUnderTest.getFifth();
         Assertions.assertEquals(FOURTH_INPUT, value);
     }
     
     @Test
-    public void thenSixthValueIsCorrect() {
+    void thenSixthValueIsCorrect() {
         final var value = systemUnderTest.getSixth();
         Assertions.assertEquals(THIRD_INPUT, value);
     }
     
     @Test
-    public void thenSeventhValueIsCorrect() {
+    void thenSeventhValueIsCorrect() {
         final var value = systemUnderTest.getSeventh();
         Assertions.assertEquals(SECOND_INPUT, value);
     }
     
     @Test
-    public void thenEighthValueIsCorrect() {
+    void thenEighthValueIsCorrect() {
         final var value = systemUnderTest.getEighth();
         Assertions.assertEquals(FIRST_INPUT, value);
     }
