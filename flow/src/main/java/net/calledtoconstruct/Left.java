@@ -141,4 +141,9 @@ public class Left<TLeft, TRight> implements Either<TLeft, TRight> {
             throw new UnexpectedNeitherException();
         }
     }
+
+    @Override
+    public Either<TRight, TLeft> flip() {
+        return new Right<>(value);
+    }
 }

@@ -146,6 +146,14 @@ public interface Either<TLeft, TRight> {
     );
 
     /**
+     * Inverts the {@code TLeft} and {@code TRight} values, returning an instance of the opposite of this instance.
+     * 
+     * @return When the current instance of {@link Left}, returns an instance of {@link Right} of the same data type and value.  When the current instance
+     * is {@link Right}, returns and instance of {@link Left} of the same data type and value.
+     */
+    Either<TRight, TLeft> flip();
+
+    /**
      * When an {@link Either} uses the same type for both the {@code TLeft} and {@code TRight}, the coalesce function will
      * extract the value from either implementation and return it.
      * 
