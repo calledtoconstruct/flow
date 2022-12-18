@@ -146,4 +146,22 @@ public class Right<TLeft, TRight> implements Either<TLeft, TRight> {
     public Either<TRight, TLeft> flip() {
         return new Left<>(value);
     }
+
+    @Override
+    public <TLeftOut> Either<TLeftOut, TRight> onLeftFlatMap(
+        Function<TLeft, Optional<TLeftOut>> function,
+        Function<TLeft, TLeftOut> otherwise
+    ) {
+        return new Right<>(value);
+    }
+
+    @Override
+    public <TRightOut> Either<TLeft, TRightOut> onRightFlatMap(
+        Function<TRight, Optional<TRightOut>> function,
+        Function<TRight, TRightOut> otherwise
+    ) {
+        return function.apply(value)
+            .map(out -> new Right<TLeft, TRightOut>(out))
+            .orElse(new Right<>(otherwise.apply(value)));
+    }
 }
