@@ -7,5 +7,4 @@ import net.calledtoconstruct.flow.example.entity.FlowData;
 
 @Repository
 public interface DataRepository extends JpaRepository<FlowData, Integer> {
-    
 }
