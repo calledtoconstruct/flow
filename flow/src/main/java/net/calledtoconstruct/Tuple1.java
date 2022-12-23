@@ -90,4 +90,50 @@ public class Tuple1<T1> implements Tuple {
         return new Tuple8<>(firstValue, other.getFirst(), other.getSecond(), other.getThird(), other.getFourth(), other.getFifth(), other.getSixth(), other.getSeventh());
     }
 
+    public <T2> Tuple2<T2, T1> prepend(final Tuple1<T2> other) {
+        return new Tuple2<>(other.getFirst(), firstValue);
+    }
+
+    public <T2, T3> Tuple3<T2, T3, T1> prepend(final Tuple2<T2, T3> other) {
+        return new Tuple3<>(other.getFirst(), other.getSecond(), firstValue);
+    }
+
+    public <T2, T3, T4> Tuple4<T2, T3, T4, T1> prepend(final Tuple3<T2, T3, T4> other) {
+        return new Tuple4<>(other.getFirst(), other.getSecond(), other.getThird(), firstValue);
+    }
+
+    public <T2, T3, T4, T5> Tuple5<T2, T3, T4, T5, T1> prepend(final Tuple4<T2, T3, T4, T5> other) {
+        return new Tuple5<>(other.getFirst(), other.getSecond(), other.getThird(), other.getFourth(), firstValue);
+    }
+
+    public <T2, T3, T4, T5, T6> Tuple6<T2, T3, T4, T5, T6, T1> prepend(final Tuple5<T2, T3, T4, T5, T6> other) {
+        return new Tuple6<>(other.getFirst(), other.getSecond(), other.getThird(), other.getFourth(), other.getFifth(), firstValue);
+    }
+
+    public <T2, T3, T4, T5, T6, T7> Tuple7<T2, T3, T4, T5, T6, T7, T1> prepend(final Tuple6<T2, T3, T4, T5, T6, T7> other) {
+        return new Tuple7<>(other.getFirst(), other.getSecond(), other.getThird(), other.getFourth(), other.getFifth(), other.getSixth(), firstValue);
+    }
+
+    public <T2, T3, T4, T5, T6, T7, T8> Tuple8<T2, T3, T4, T5, T6, T7, T8, T1> prepend(final Tuple7<T2, T3, T4, T5, T6, T7, T8> other) {
+        return new Tuple8<>(other.getFirst(), other.getSecond(), other.getThird(), other.getFourth(), other.getFifth(), other.getSixth(), other.getSeventh(), firstValue);
+    }
+
+    @Override
+    public <T> Optional<T> tryGetFirst(Class<T> clazz) {
+        if (clazz.isAssignableFrom(firstValue.getClass())) {
+            final var cast = clazz.cast(firstValue);
+            return Optional.of(cast);
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public <T> Optional<T> tryGetLast(Class<T> clazz) {
+        if (clazz.isAssignableFrom(firstValue.getClass())) {
+            final var cast = clazz.cast(firstValue);
+            return Optional.of(cast);
+        }
+        return Optional.empty();
+    }
+
 }
