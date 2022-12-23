@@ -62,4 +62,32 @@ public class Tuple1<T1> implements Tuple {
         return Optional.of(unshift(value));
     }
 
+    public <T2> Tuple2<T1, T2> append(final Tuple1<T2> other) {
+        return new Tuple2<>(firstValue, other.getFirst());
+    }
+
+    public <T2, T3> Tuple3<T1, T2, T3> append(final Tuple2<T2, T3> other) {
+        return new Tuple3<>(firstValue, other.getFirst(), other.getSecond());
+    }
+
+    public <T2, T3, T4> Tuple4<T1, T2, T3, T4> append(final Tuple3<T2, T3, T4> other) {
+        return new Tuple4<>(firstValue, other.getFirst(), other.getSecond(), other.getThird());
+    }
+
+    public <T2, T3, T4, T5> Tuple5<T1, T2, T3, T4, T5> append(final Tuple4<T2, T3, T4, T5> other) {
+        return new Tuple5<>(firstValue, other.getFirst(), other.getSecond(), other.getThird(), other.getFourth());
+    }
+
+    public <T2, T3, T4, T5, T6> Tuple6<T1, T2, T3, T4, T5, T6> append(final Tuple5<T2, T3, T4, T5, T6> other) {
+        return new Tuple6<>(firstValue, other.getFirst(), other.getSecond(), other.getThird(), other.getFourth(), other.getFifth());
+    }
+
+    public <T2, T3, T4, T5, T6, T7> Tuple7<T1, T2, T3, T4, T5, T6, T7> append(final Tuple6<T2, T3, T4, T5, T6, T7> other) {
+        return new Tuple7<>(firstValue, other.getFirst(), other.getSecond(), other.getThird(), other.getFourth(), other.getFifth(), other.getSixth());
+    }
+
+    public <T2, T3, T4, T5, T6, T7, T8> Tuple8<T1, T2, T3, T4, T5, T6, T7, T8> append(final Tuple7<T2, T3, T4, T5, T6, T7, T8> other) {
+        return new Tuple8<>(firstValue, other.getFirst(), other.getSecond(), other.getThird(), other.getFourth(), other.getFifth(), other.getSixth(), other.getSeventh());
+    }
+
 }

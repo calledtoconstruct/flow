@@ -138,4 +138,12 @@ public class Tuple6<T1, T2, T3, T4, T5, T6> implements Tuple {
         return sixthValue;
     }
 
+    public <T7> Tuple7<T1, T2, T3, T4, T5, T6, T7> append(final Tuple1<T7> other) {
+        return new Tuple7<>(firstValue, secondValue, thirdValue, fourthValue, fifthValue, sixthValue, other.getFirst());
+    }
+
+    public <T7, T8> Tuple8<T1, T2, T3, T4, T5, T6, T7, T8> append(final Tuple2<T7, T8> other) {
+        return new Tuple8<>(firstValue, secondValue, thirdValue, fourthValue, fifthValue, sixthValue, other.getFirst(), other.getSecond());
+    }
+
 }

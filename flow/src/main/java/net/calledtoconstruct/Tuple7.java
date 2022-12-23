@@ -149,4 +149,8 @@ public class Tuple7<T1, T2, T3, T4, T5, T6, T7> implements Tuple {
         return seventhValue;
     }
 
+    public <T8> Tuple8<T1, T2, T3, T4, T5, T6, T7, T8> append(final Tuple1<T8> other) {
+        return new Tuple8<>(firstValue, secondValue, thirdValue, fourthValue, fifthValue, sixthValue, seventhValue, other.getFirst());
+    }
+
 }

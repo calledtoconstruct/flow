@@ -116,4 +116,20 @@ public class Tuple4<T1, T2, T3, T4> implements Tuple {
         return fourthValue;
     }
 
+    public <T5> Tuple5<T1, T2, T3, T4, T5> append(final Tuple1<T5> other) {
+        return new Tuple5<>(firstValue, secondValue, thirdValue, fourthValue, other.getFirst());
+    }
+
+    public <T5, T6> Tuple6<T1, T2, T3, T4, T5, T6> append(final Tuple2<T5, T6> other) {
+        return new Tuple6<>(firstValue, secondValue, thirdValue, fourthValue, other.getFirst(), other.getSecond());
+    }
+
+    public <T5, T6, T7> Tuple7<T1, T2, T3, T4, T5, T6, T7> append(final Tuple3<T5, T6, T7> other) {
+        return new Tuple7<>(firstValue, secondValue, thirdValue, fourthValue, other.getFirst(), other.getSecond(), other.getThird());
+    }
+
+    public <T5, T6, T7, T8> Tuple8<T1, T2, T3, T4, T5, T6, T7, T8> append(final Tuple4<T5, T6, T7, T8> other) {
+        return new Tuple8<>(firstValue, secondValue, thirdValue, fourthValue, other.getFirst(), other.getSecond(), other.getThird(), other.getFourth());
+    }
+
 }

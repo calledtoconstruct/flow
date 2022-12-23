@@ -105,4 +105,24 @@ public class Tuple3<T1, T2, T3> implements Tuple {
         return thirdValue;
     }
 
+    public <T4> Tuple4<T1, T2, T3, T4> append(final Tuple1<T4> other) {
+        return new Tuple4<>(firstValue, secondValue, thirdValue, other.getFirst());
+    }
+
+    public <T4, T5> Tuple5<T1, T2, T3, T4, T5> append(final Tuple2<T4, T5> other) {
+        return new Tuple5<>(firstValue, secondValue, thirdValue, other.getFirst(), other.getSecond());
+    }
+
+    public <T4, T5, T6> Tuple6<T1, T2, T3, T4, T5, T6> append(final Tuple3<T4, T5, T6> other) {
+        return new Tuple6<>(firstValue, secondValue, thirdValue, other.getFirst(), other.getSecond(), other.getThird());
+    }
+
+    public <T4, T5, T6, T7> Tuple7<T1, T2, T3, T4, T5, T6, T7> append(final Tuple4<T4, T5, T6, T7> other) {
+        return new Tuple7<>(firstValue, secondValue, thirdValue, other.getFirst(), other.getSecond(), other.getThird(), other.getFourth());
+    }
+
+    public <T4, T5, T6, T7, T8> Tuple8<T1, T2, T3, T4, T5, T6, T7, T8> append(final Tuple5<T4, T5, T6, T7, T8> other) {
+        return new Tuple8<>(firstValue, secondValue, thirdValue, other.getFirst(), other.getSecond(), other.getThird(), other.getFourth(), other.getFifth());
+    }
+
 }
