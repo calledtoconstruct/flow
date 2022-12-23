@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -111,8 +112,8 @@ public class Left<TLeft, TRight> implements Either<TLeft, TRight> {
     @Override
     public <TOtherLeft, TOtherRight, TLeftOut, TRightOut> Either<TLeftOut, TRightOut> mergeFailToLeft(
         Either<TOtherLeft, TOtherRight> other,
-        Function2<TLeft, TOtherLeft, TLeftOut> functionMergeLeft,
-        Function2<TRight, TOtherRight, TRightOut> functionMergeRight,
+        BiFunction<TLeft, TOtherLeft, TLeftOut> functionMergeLeft,
+        BiFunction<TRight, TOtherRight, TRightOut> functionMergeRight,
         Function<TLeft, TLeftOut> transformThis,
         Function<TOtherLeft, TLeftOut> transformOther
     ) {
@@ -128,8 +129,8 @@ public class Left<TLeft, TRight> implements Either<TLeft, TRight> {
     @Override
     public <TOtherLeft, TOtherRight, TLeftOut, TRightOut> Either<TLeftOut, TRightOut> mergeFailToRight(
         Either<TOtherLeft, TOtherRight> other,
-        Function2<TLeft, TOtherLeft, TLeftOut> functionLeft,
-        Function2<TRight, TOtherRight, TRightOut> functionRight,
+        BiFunction<TLeft, TOtherLeft, TLeftOut> functionLeft,
+        BiFunction<TRight, TOtherRight, TRightOut> functionRight,
         Function<TRight, TRightOut> transformThis,
         Function<TOtherRight, TRightOut> transformOther
     ) {
