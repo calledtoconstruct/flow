@@ -4,6 +4,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutionException;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +13,8 @@ import net.calledtoconstruct.Left;
 import net.calledtoconstruct.Right;
 import net.calledtoconstruct.flow.example.service.LongRunningFunctions;
 
-@RequestMapping("lrf")
+@Controller
+@RequestMapping("/lrf")
 public class LongRunningFunctionController {
 
     private final class PageName {
@@ -26,7 +28,7 @@ public class LongRunningFunctionController {
 
     private static final String LOG_NUMBER_RECEIVED_FORMAT = "Received number: %d";
 
-    @GetMapping("/")
+    @GetMapping(path = {"", "/"})
     public String executeLongRunningFunctions(final Model model) throws InterruptedException, ExecutionException {
         model.addAttribute(AttributeName.TITLE, "Long Running Functions");
 

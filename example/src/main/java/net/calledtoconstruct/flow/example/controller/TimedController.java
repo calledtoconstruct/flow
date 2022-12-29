@@ -2,6 +2,7 @@ package net.calledtoconstruct.flow.example.controller;
 
 import java.util.List;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +12,8 @@ import net.calledtoconstruct.Tuple3;
 import net.calledtoconstruct.flow.example.entity.FlowData;
 import net.calledtoconstruct.flow.example.service.DataService;
 
-@RequestMapping("timed")
+@Controller
+@RequestMapping("/timed")
 public class TimedController {
 
     private final class PageName {
@@ -40,7 +42,7 @@ public class TimedController {
         model.addAttribute(AttributeName.DURATION, dataCountAndDuration.getThird());
     }
     
-    @GetMapping("/")
+    @GetMapping(path = {"", "/"})
     public String getTimed(Model model) {
         final var result = dataService.getDataAndCountTimed()
             .onLeftAccept(dataCountAndDuration -> populateTimedModel(model, dataCountAndDuration))
