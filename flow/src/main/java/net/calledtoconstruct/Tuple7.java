@@ -149,4 +149,30 @@ public class Tuple7<T1, T2, T3, T4, T5, T6, T7> implements Tuple {
         return seventhValue;
     }
 
+    public <T8> Tuple8<T1, T2, T3, T4, T5, T6, T7, T8> append(final Tuple1<T8> other) {
+        return new Tuple8<>(firstValue, secondValue, thirdValue, fourthValue, fifthValue, sixthValue, seventhValue, other.getFirst());
+    }
+
+    public <T8> Tuple8<T8, T1, T2, T3, T4, T5, T6, T7> prepend(final Tuple1<T8> other) {
+        return new Tuple8<>(other.getFirst(), firstValue, secondValue, thirdValue, fourthValue, fifthValue, sixthValue, seventhValue);
+    }
+
+    @Override
+    public <T> Optional<T> tryGetFirst(Class<T> clazz) {
+        if (clazz.isAssignableFrom(firstValue.getClass())) {
+            final var cast = clazz.cast(firstValue);
+            return Optional.of(cast);
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public <T> Optional<T> tryGetLast(Class<T> clazz) {
+        if (clazz.isAssignableFrom(seventhValue.getClass())) {
+            final var cast = clazz.cast(seventhValue);
+            return Optional.of(cast);
+        }
+        return Optional.empty();
+    }
+
 }

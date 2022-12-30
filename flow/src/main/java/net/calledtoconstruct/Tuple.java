@@ -46,4 +46,7 @@ public interface Tuple {
      * @return A new {@link java.util.Optional} of {@link Tuple}, or an empty {@link java.util.Optional}
      */
     <T> Optional<Tuple> tryUnshift(T value);
+
+    <T> Optional<T> tryGetFirst(Class<T> clazz);
+    <T> Optional<T> tryGetLast(Class<T> clazz);
 }

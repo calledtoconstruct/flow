@@ -136,4 +136,22 @@ public class Tuple8<T1, T2, T3, T4, T5, T6, T7, T8> implements Tuple {
         return eighthValue;
     }
 
+    @Override
+    public <T> Optional<T> tryGetFirst(Class<T> clazz) {
+        if (clazz.isAssignableFrom(firstValue.getClass())) {
+            final var cast = clazz.cast(firstValue);
+            return Optional.of(cast);
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public <T> Optional<T> tryGetLast(Class<T> clazz) {
+        if (clazz.isAssignableFrom(eighthValue.getClass())) {
+            final var cast = clazz.cast(eighthValue);
+            return Optional.of(cast);
+        }
+        return Optional.empty();
+    }
+
 }

@@ -127,4 +127,46 @@ public class Tuple5<T1, T2, T3, T4, T5> implements Tuple {
         return fifthValue;
     }
 
+    public <T6> Tuple6<T1, T2, T3, T4, T5, T6> append(final Tuple1<T6> other) {
+        return new Tuple6<>(firstValue, secondValue, thirdValue, fourthValue, fifthValue, other.getFirst());
+    }
+
+    public <T6, T7> Tuple7<T1, T2, T3, T4, T5, T6, T7> append(final Tuple2<T6, T7> other) {
+        return new Tuple7<>(firstValue, secondValue, thirdValue, fourthValue, fifthValue, other.getFirst(), other.getSecond());
+    }
+
+    public <T6, T7, T8> Tuple8<T1, T2, T3, T4, T5, T6, T7, T8> append(final Tuple3<T6, T7, T8> other) {
+        return new Tuple8<>(firstValue, secondValue, thirdValue, fourthValue, fifthValue, other.getFirst(), other.getSecond(), other.getThird());
+    }
+
+    public <T6> Tuple6<T6, T1, T2, T3, T4, T5> prepend(final Tuple1<T6> other) {
+        return new Tuple6<>(other.getFirst(), firstValue, secondValue, thirdValue, fourthValue, fifthValue);
+    }
+
+    public <T6, T7> Tuple7<T6, T7, T1, T2, T3, T4, T5> prepend(final Tuple2<T6, T7> other) {
+        return new Tuple7<>(other.getFirst(), other.getSecond(), firstValue, secondValue, thirdValue, fourthValue, fifthValue);
+    }
+
+    public <T6, T7, T8> Tuple8<T6, T7, T8, T1, T2, T3, T4, T5> prepend(final Tuple3<T6, T7, T8> other) {
+        return new Tuple8<>(other.getFirst(), other.getSecond(), other.getThird(), firstValue, secondValue, thirdValue, fourthValue, fifthValue);
+    }
+
+    @Override
+    public <T> Optional<T> tryGetFirst(Class<T> clazz) {
+        if (clazz.isAssignableFrom(firstValue.getClass())) {
+            final var cast = clazz.cast(firstValue);
+            return Optional.of(cast);
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public <T> Optional<T> tryGetLast(Class<T> clazz) {
+        if (clazz.isAssignableFrom(fifthValue.getClass())) {
+            final var cast = clazz.cast(fifthValue);
+            return Optional.of(cast);
+        }
+        return Optional.empty();
+    }
+
 }

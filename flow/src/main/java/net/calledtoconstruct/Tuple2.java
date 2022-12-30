@@ -94,4 +94,70 @@ public class Tuple2<T1, T2> implements Tuple {
         return secondValue;
     }
 
+    public <T3> Tuple3<T1, T2, T3> append(final Tuple1<T3> other) {
+        return new Tuple3<>(firstValue, secondValue, other.getFirst());
+    }
+
+    public <T3, T4> Tuple4<T1, T2, T3, T4> append(final Tuple2<T3, T4> other) {
+        return new Tuple4<>(firstValue, secondValue, other.getFirst(), other.getSecond());
+    }
+
+    public <T3, T4, T5> Tuple5<T1, T2, T3, T4, T5> append(final Tuple3<T3, T4, T5> other) {
+        return new Tuple5<>(firstValue, secondValue, other.getFirst(), other.getSecond(), other.getThird());
+    }
+
+    public <T3, T4, T5, T6> Tuple6<T1, T2, T3, T4, T5, T6> append(final Tuple4<T3, T4, T5, T6> other) {
+        return new Tuple6<>(firstValue, secondValue, other.getFirst(), other.getSecond(), other.getThird(), other.getFourth());
+    }
+
+    public <T3, T4, T5, T6, T7> Tuple7<T1, T2, T3, T4, T5, T6, T7> append(final Tuple5<T3, T4, T5, T6, T7> other) {
+        return new Tuple7<>(firstValue, secondValue, other.getFirst(), other.getSecond(), other.getThird(), other.getFourth(), other.getFifth());
+    }
+
+    public <T3, T4, T5, T6, T7, T8> Tuple8<T1, T2, T3, T4, T5, T6, T7, T8> append(final Tuple6<T3, T4, T5, T6, T7, T8> other) {
+        return new Tuple8<>(firstValue, secondValue, other.getFirst(), other.getSecond(), other.getThird(), other.getFourth(), other.getFifth(), other.getSixth());
+    }
+
+    public <T3> Tuple3<T3, T1, T2> prepend(final Tuple1<T3> other) {
+        return new Tuple3<>(other.getFirst(), firstValue, secondValue);
+    }
+
+    public <T3, T4> Tuple4<T3, T4, T1, T2> prepend(final Tuple2<T3, T4> other) {
+        return new Tuple4<>(other.getFirst(), other.getSecond(), firstValue, secondValue);
+    }
+
+    public <T3, T4, T5> Tuple5<T3, T4, T5, T1, T2> prepend(final Tuple3<T3, T4, T5> other) {
+        return new Tuple5<>(other.getFirst(), other.getSecond(), other.getThird(), firstValue, secondValue);
+    }
+
+    public <T3, T4, T5, T6> Tuple6<T3, T4, T5, T6, T1, T2> prepend(final Tuple4<T3, T4, T5, T6> other) {
+        return new Tuple6<>(other.getFirst(), other.getSecond(), other.getThird(), other.getFourth(), firstValue, secondValue);
+    }
+
+    public <T3, T4, T5, T6, T7> Tuple7<T3, T4, T5, T6, T7, T1, T2> prepend(final Tuple5<T3, T4, T5, T6, T7> other) {
+        return new Tuple7<>(other.getFirst(), other.getSecond(), other.getThird(), other.getFourth(), other.getFifth(), firstValue, secondValue);
+    }
+
+    public <T3, T4, T5, T6, T7, T8> Tuple8<T3, T4, T5, T6, T7, T8, T1, T2> prepend(final Tuple6<T3, T4, T5, T6, T7, T8> other) {
+        return new Tuple8<>(other.getFirst(), other.getSecond(), other.getThird(), other.getFourth(), other.getFifth(), other.getSixth(), firstValue, secondValue);
+    }
+
+    @Override
+    public <T> Optional<T> tryGetFirst(Class<T> clazz) {
+        if (clazz.isAssignableFrom(firstValue.getClass())) {
+            final var cast = clazz.cast(firstValue);
+            return Optional.of(cast);
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public <T> Optional<T> tryGetLast(Class<T> clazz) {
+        if (clazz.isAssignableFrom(secondValue.getClass())) {
+            final var cast = clazz.cast(secondValue);
+            return Optional.of(cast);
+        }
+        return Optional.empty();
+    }
+
 }
