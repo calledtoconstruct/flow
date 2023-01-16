@@ -1,6 +1,7 @@
 package net.calledtoconstruct.flow.example.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -58,6 +59,14 @@ public class DataService {
         } catch (final DataAccessException exception) {
             return new Right<>(exception.getMessage());
         }
+    }
+
+    public Optional<FlowData> getById(final Integer id) {
+        return dataRepository.findById(id);
+    }
+
+    public FlowData createPlaceholder(final Integer id) {
+        return new FlowData();
     }
     
 }

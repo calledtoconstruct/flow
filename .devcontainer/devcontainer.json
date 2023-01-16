@@ -8,8 +8,16 @@
 			"version": "none",
 			"installMaven": "true",
 			"installGradle": "false"
+		},
+		"docker-from-docker": {
+			"version": "latest",
+			"moby": true,
+			"dockerDashComposeVersion": "v1"
 		}
-	}
+	},
+	"mounts": [
+		"source=${localEnv:HOME}${localEnv:USERPROFILE}/.kube,target=/home/vscode/.kube,type=bind,consistency=cached"
+	]
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],

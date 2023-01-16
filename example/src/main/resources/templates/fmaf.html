@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <title th:text="${title}"></title>
+    <script src="http://localhost:35729/livereload.js"></script>
+</head>
+
+<body>
+    <div th:replace="~{./fragments/layout :: header}"></div>
+    <h6 th:text="${date}"></h6>
+    <div>
+        <label for="id">ID:</label>
+        <input type="text" id="id" th:value="${row.id}" disabled />
+    </div>
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" th:value="${row.name}" disabled />
+    </div>
+    <div>
+        <label for="description">Description:</label>
+        <input type="text" id="description" th:value="${row.description}" disabled />
+    </div>
+    <div th:replace="~{./fragments/layout :: footer}"></div>
+</body>
+
+</html>

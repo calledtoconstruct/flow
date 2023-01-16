@@ -1,6 +1,7 @@
 package net.calledtoconstruct;
 
 import java.util.function.BiFunction;
+import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -42,6 +43,23 @@ public interface Either<TLeft, TRight> {
     <TOther> Either<TOther, TRight> onLeftSupply(Supplier<TOther> supplier);
 
     /**
+     * Given that the existing {@link Either} is of type {@link Left}, {@code onLeftFlatMap} transforms the contained value of
+     * type {@code TLeft} to {@code Optional<TLeftOut>} using the supplied {@code function}.  If the value returned is present,
+     * a new instance of {@link Left} as {@link Either} is returned containing the transformed value.  If the value returned is
+     * empty, then {@code otherwise} is invoked and the provided value is used instead.  When the {@link Either} is of type
+     * {@link Right}, {@code function} is not invoked, and an instance of {@link Right} is returned retaining its value.
+     * 
+     * @param <TLeftOut> The type of the transformed {@link Left} value.
+     * @param function A function that accepts the {@code TLeft} value and returns an {@code Optional<TLeftOut>}.
+     * @param otherwise A function that accepts the {@code TLeft} value and returns an {@code TLeftOut} when {@code function} returns empty.
+     * @return An {@link Either} containing a {@link Left} or {@link Right} based on the above rules.
+     */
+    <TLeftOut> Either<TLeftOut, TRight> onLeftFlatMap(
+        Function<TLeft, Optional<TLeftOut>> function,
+        Function<TLeft, TLeftOut> otherwise
+    );
+
+    /**
      * Given that the existing {@link Either} is of type {@link Right}, the {@code onRightApply} transforms the contained value of
      * type {@code TRight} using the supplied {@code function}, returning a new instance of {@link Right} as {@link Either}
      * containing the transformed value of type {@code TOther}. When the {@link Either} is of type {@link Left}, the {@code function}
@@ -75,6 +93,23 @@ public interface Either<TLeft, TRight> {
      * @return A new instance of {@link Right} containing the supplied value, or the existing instance of type {@link Left}.
      */
     <TOther> Either<TLeft, TOther> onRightSupply(Supplier<TOther> supplier);
+
+    /**
+     * Given that the existing {@link Either} is of type {@link Right}, {@code onRightFlatMap} transforms the contained value of
+     * type {@code TRight} to {@code Optional<TRightOut>} using the supplied {@code function}.  If the value returned is present,
+     * a new instance of {@link Right} as {@link Either} is returned containing the transformed value.  If the value returned is
+     * empty, then {@code otherwise} is invoked and the provided value is used instead.  When the {@link Either} is of type
+     * {@link Left}, {@code function} is not invoked, and an instance of {@link Left} is returned retaining its value.
+     * 
+     * @param <TRightOut> The type of the transformed {@link Right} value.
+     * @param function A function that accepts the {@code TRight} value and returns an {@code Optional<TRightOut>}.
+     * @param otherwise A function that accepts the {@code TRight} value and returns an {@code TRightOut} when {@code function} returns empty.
+     * @return An {@link Either} containing a {@link Left} or {@link Right} based on the above rules.
+     */
+    <TRightOut> Either<TLeft, TRightOut> onRightFlatMap(
+        Function<TRight, Optional<TRightOut>> function,
+        Function<TRight, TRightOut> otherwise
+    );
 
     /**
      * Given the current {@link Either} and a provided "other" {@link Either}, attempt to merge the values they contain such that
@@ -145,6 +180,18 @@ public interface Either<TLeft, TRight> {
         Function<TRight, TRightOut> transformThis,
         Function<TOtherRight, TRightOut> transformOther
     );
+
+    /**
+     * Retains the value, whether {@code TLeft} or {@code TRight}, but inverts the
+     * container.  So, {@link Left} {@code .flip()} will return an instance of {@link Right}, 
+     * and {@link Right} {@code .flip()} will return an instance of {@link Left}.
+     * 
+     * @return When the current instance is {@link Left}, this returns an instance
+     * of {@link Right} containing the value of type {@code TLeft}.  When the current instance
+     * is {@link Right}, this returns and instance of {@link Left} containing the value of
+     * type {@code TRight}.
+     */
+    Either<TRight, TLeft> flip();
 
     /**
      * When an {@link Either} uses the same type for both the {@code TLeft} and {@code TRight}, the coalesce function will

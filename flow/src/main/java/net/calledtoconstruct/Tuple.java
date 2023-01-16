@@ -123,4 +123,7 @@ public interface Tuple {
         Array.set(array, 7, tuple.getEighth());
         return (T[]) array;
     }
+
+    <T> Optional<T> tryGetFirst(Class<T> clazz);
+    <T> Optional<T> tryGetLast(Class<T> clazz);
 }
