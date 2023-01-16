@@ -1,11 +1,17 @@
-<html>
+<!DOCTYPE html>
+<html lang="en-US">
     <head>
         <title th:text="${title}"></title>
         <script src="http://localhost:35729/livereload.js"></script>
     </head>
     <body>
         <div th:replace="~{./fragments/layout :: header}"></div>
-        <table>
+        <table aria-label="A list of flow classes.">
+            <th>
+                <td>ID</td>
+                <td>NAME</td>
+                <td>DESCRIPTION</td>
+            </th>
             <tr th:each="flowData : ${rows}">
                 <td th:text="${flowData.id}"></td>
                 <td th:text="${flowData.name}"></td>
