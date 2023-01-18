@@ -80,3 +80,23 @@ This builds on the Either example:
         }
     }
 ```
+
+
+### Using an Either:
+
+```java
+    @GetMapping("/data/{id}")
+    public String get(final @PathVariable int id, final Model model) {
+        final var instantNow = Instant.now();
+        final var currentDateAndTime = Date.from(instantNow);
+        final var titleAndDate = TITLE.push(currentDateAndTime);
+        final var result = new Right<String, Integer>(id)
+            .flip()
+            // Load the entity, when not found, return a placeholder object.
+            .<FlowData>onLeftFlatMap(dataService::getById, dataService::createPlaceholder)
+            .onLeftApply(titleAndDate::push)
+            .onLeftAccept(titleDateAndFlowData -> populateModel(model, titleDateAndFlowData))
+            .onLeftSupply(() -> "ThymeLeaf_Template_Name");
+        return Either.coalesce(result);
+    }
+```
