@@ -41,13 +41,13 @@ Implementations:
 
 * [Tuple4](https://github.com/calledtoconstruct/flow/blob/main/flow/src/main/java/net/calledtoconstruct/Tuple4.java) - Example: new Tuple4\<MyClass, Long, Long, String\>
 
-* [Tuple5](https://github.com/calledtoconstruct/flow/blob/main/flow/src/main/java/net/calledtoconstruct/Tuple5.java) - Example: new Tuple5\<String, Integer, Long, Short, Char>
+* [Tuple5](https://github.com/calledtoconstruct/flow/blob/main/flow/src/main/java/net/calledtoconstruct/Tuple5.java) - Example: new Tuple5\<String, Integer, Long, Short, Char\>
 
-* [Tuple6](https://github.com/calledtoconstruct/flow/blob/main/flow/src/main/java/net/calledtoconstruct/Tuple6.java) - Example: new Tuple6\<Integer, Long, Short, Char, Byte, Float>
+* [Tuple6](https://github.com/calledtoconstruct/flow/blob/main/flow/src/main/java/net/calledtoconstruct/Tuple6.java) - Example: new Tuple6\<Integer, Long, Short, Char, Byte, Float\>
 
-* [Tuple7](https://github.com/calledtoconstruct/flow/blob/main/flow/src/main/java/net/calledtoconstruct/Tuple7.java) - Example: new Tuple7\<MyClass, String, Long, Double, String, Integer, Integer>
+* [Tuple7](https://github.com/calledtoconstruct/flow/blob/main/flow/src/main/java/net/calledtoconstruct/Tuple7.java) - Example: new Tuple7\<MyClass, String, Long, Double, String, Integer, Integer\>
 
-* [Tuple8](https://github.com/calledtoconstruct/flow/blob/main/flow/src/main/java/net/calledtoconstruct/Tuple8.java) - Example: new Tuple8\<Double, Double, String, Long, Short, String, String, Integer>
+* [Tuple8](https://github.com/calledtoconstruct/flow/blob/main/flow/src/main/java/net/calledtoconstruct/Tuple8.java) - Example: new Tuple8\<Double, Double, String, Long, Short, String, String, Integer\>
 
 ...
 
