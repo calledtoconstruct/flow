@@ -6,7 +6,7 @@
 
   <groupId>net.calledtoconstruct</groupId>
   <artifactId>flow</artifactId>
-  <version>1.2</version>
+  <version>1.3</version>
 
   <name>${project.groupId}:${project.artifactId}</name>
   <description>A small collection of potentially useful classes for streamlining process flow.</description>
