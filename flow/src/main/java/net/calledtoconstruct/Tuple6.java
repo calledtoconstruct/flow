@@ -2,6 +2,9 @@ package net.calledtoconstruct;
 
 import java.util.Optional;
 
+/**
+ * An implementation of the Tuple interface which contains six elements of type T1, T2, T3, T4, T5 and T6.
+ */
 public class Tuple6<T1, T2, T3, T4, T5, T6> implements Tuple {
 
     private final T1 firstValue;
@@ -11,6 +14,9 @@ public class Tuple6<T1, T2, T3, T4, T5, T6> implements Tuple {
     private final T5 fifthValue;
     private final T6 sixthValue;
 
+    /**
+     * A constructor for the {@link Tuple6} class which accepts six values of types T1, T2, T3, T4, T5 and T6.
+     */
     public Tuple6(T1 firstValue, T2 secondValue, T3 thirdValue, T4 fourthValue, T5 fifthValue, T6 sixthValue) {
         this.firstValue = firstValue;
         this.secondValue = secondValue;
@@ -138,10 +144,16 @@ public class Tuple6<T1, T2, T3, T4, T5, T6> implements Tuple {
         return sixthValue;
     }
 
+    /**
+     * Appends the value of the provided {@link Tuple1} to the end of this instance and returns a {@link Tuple7}.
+     */
     public <T7> Tuple7<T1, T2, T3, T4, T5, T6, T7> append(final Tuple1<T7> other) {
         return new Tuple7<>(firstValue, secondValue, thirdValue, fourthValue, fifthValue, sixthValue, other.getFirst());
     }
 
+    /**
+     * Appends the values of the provided {@link Tuple2} to the end of this instance and returns a {@link Tuple8}.
+     */
     public <T7, T8> Tuple8<T1, T2, T3, T4, T5, T6, T7, T8> append(final Tuple2<T7, T8> other) {
         return new Tuple8<>(firstValue, secondValue, thirdValue, fourthValue, fifthValue, sixthValue, other.getFirst(), other.getSecond());
     }

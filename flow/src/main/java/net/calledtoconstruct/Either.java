@@ -6,6 +6,11 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+/**
+ * The Either interface provides an abstraction for working with one of two outcomes.  Similar to {@link Optional}, where one
+ * has a value or empty, Either provides a {@link Left} or {@link Right} value.  One can then perform actions using functions
+ * like {@code onLeftAply} or {@code onRightAccept}.
+ */
 public interface Either<TLeft, TRight> {
 
     /**

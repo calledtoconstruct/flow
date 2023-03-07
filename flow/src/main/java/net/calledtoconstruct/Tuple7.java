@@ -2,6 +2,9 @@ package net.calledtoconstruct;
 
 import java.util.Optional;
 
+/**
+ * An implementation of the Tuple interface which contains seven elements of type T1, T2, T3, T4, T5, T6 and T7.
+ */
 public class Tuple7<T1, T2, T3, T4, T5, T6, T7> implements Tuple {
 
     private final T1 firstValue;
@@ -12,6 +15,9 @@ public class Tuple7<T1, T2, T3, T4, T5, T6, T7> implements Tuple {
     private final T6 sixthValue;
     private final T7 seventhValue;
 
+    /**
+     * A constructor for the {@link Tuple7} class which accepts seven values of types T1, T2, T3, T4, T5, T6 and T7.
+     */
     public Tuple7(T1 firstValue, T2 secondValue, T3 thirdValue, T4 fourthValue, T5 fifthValue, T6 sixthValue, T7 seventhValue) {
         this.firstValue = firstValue;
         this.secondValue = secondValue;
@@ -149,6 +155,9 @@ public class Tuple7<T1, T2, T3, T4, T5, T6, T7> implements Tuple {
         return seventhValue;
     }
 
+    /**
+     * Appends the value of the provided {@link Tuple1} to the end of this instance and returns a {@link Tuple8}.
+     */
     public <T8> Tuple8<T1, T2, T3, T4, T5, T6, T7, T8> append(final Tuple1<T8> other) {
         return new Tuple8<>(firstValue, secondValue, thirdValue, fourthValue, fifthValue, sixthValue, seventhValue, other.getFirst());
     }

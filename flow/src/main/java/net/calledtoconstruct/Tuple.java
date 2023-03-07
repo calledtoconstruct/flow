@@ -3,6 +3,9 @@ package net.calledtoconstruct;
 import java.lang.reflect.Array;
 import java.util.Optional;
 
+/**
+ * The tuple interface provides the definition for functions common to all Tuple<...> implementations.
+ */
 public interface Tuple {
     /**
      * A function that returns a new {@link java.util.Optional} of {@link Tuple} containing 
@@ -48,12 +51,18 @@ public interface Tuple {
      */
     <T> Optional<Tuple> tryUnshift(T value);
 
+    /**
+     * Converts a Tuple1<T> instance to an array of type T
+     */
     static <T> T[] toArray(final Tuple1<T> tuple, Class<T> clazz) {
         final var array = Array.newInstance(clazz, 1);
         Array.set(array, 0, tuple.getFirst());
         return (T[]) array;
     }
 
+    /**
+     * Converts a Tuple2<T> instance to an array of type T
+     */
     static <T> T[] toArray(final Tuple2<T, T> tuple, Class<T> clazz) {
         final var array = Array.newInstance(clazz, 2);
         Array.set(array, 0, tuple.getFirst());
@@ -61,6 +70,9 @@ public interface Tuple {
         return (T[]) array;
     }
 
+    /**
+     * Converts a Tuple3<T> instance to an array of type T
+     */
     static <T> T[] toArray(final Tuple3<T, T, T> tuple, Class<T> clazz) {
         final var array = Array.newInstance(clazz, 3);
         Array.set(array, 0, tuple.getFirst());
@@ -69,6 +81,9 @@ public interface Tuple {
         return (T[]) array;
     }
 
+    /**
+     * Converts a Tuple4<T> instance to an array of type T
+     */
     static <T> T[] toArray(final Tuple4<T, T, T, T> tuple, Class<T> clazz) {
         final var array = Array.newInstance(clazz, 4);
         Array.set(array, 0, tuple.getFirst());
@@ -78,6 +93,9 @@ public interface Tuple {
         return (T[]) array;
     }
 
+    /**
+     * Converts a Tuple5<T> instance to an array of type T
+     */
     static <T> T[] toArray(final Tuple5<T, T, T, T, T> tuple, Class<T> clazz) {
         final var array = Array.newInstance(clazz, 5);
         Array.set(array, 0, tuple.getFirst());
@@ -88,6 +106,9 @@ public interface Tuple {
         return (T[]) array;
     }
 
+    /**
+     * Converts a Tuple6<T> instance to an array of type T
+     */
     static <T> T[] toArray(final Tuple6<T, T, T, T, T, T> tuple, Class<T> clazz) {
         final var array = Array.newInstance(clazz, 6);
         Array.set(array, 0, tuple.getFirst());
@@ -99,6 +120,9 @@ public interface Tuple {
         return (T[]) array;
     }
 
+    /**
+     * Converts a Tuple7<T> instance to an array of type T
+     */
     static <T> T[] toArray(final Tuple7<T, T, T, T, T, T, T> tuple, Class<T> clazz) {
         final var array = Array.newInstance(clazz, 7);
         Array.set(array, 0, tuple.getFirst());
@@ -111,6 +135,9 @@ public interface Tuple {
         return (T[]) array;
     }
 
+    /**
+     * Converts a Tuple8<T> instance to an array of type T
+     */
     static <T> T[] toArray(final Tuple8<T, T, T, T, T, T, T, T> tuple, Class<T> clazz) {
         final var array = Array.newInstance(clazz, 8);
         Array.set(array, 0, tuple.getFirst());
@@ -124,6 +151,13 @@ public interface Tuple {
         return (T[]) array;
     }
 
+    /**
+     * Attempts to return the first element from a Tuple.  If the Tuple is empty, an empty Optional<T> is returned.
+     */
     <T> Optional<T> tryGetFirst(Class<T> clazz);
+
+    /**
+     * Attempts to return the last element from a Tuple.  If the Tuple is empty, an empty Optional<T> is returned.
+     */
     <T> Optional<T> tryGetLast(Class<T> clazz);
 }

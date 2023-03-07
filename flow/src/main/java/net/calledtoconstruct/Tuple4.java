@@ -2,6 +2,9 @@ package net.calledtoconstruct;
 
 import java.util.Optional;
 
+/**
+ * An implementation of the Tuple interface which contains four elements of type T1, T2, T3 and T4.
+ */
 public class Tuple4<T1, T2, T3, T4> implements Tuple {
 
     private final T1 firstValue;
@@ -9,6 +12,9 @@ public class Tuple4<T1, T2, T3, T4> implements Tuple {
     private final T3 thirdValue;
     private final T4 fourthValue;
 
+    /**
+     * A constructor for the {@link Tuple4} class which accepts four values of types T1, T2, T3 and T4.
+     */
     public Tuple4(T1 firstValue, T2 secondValue, T3 thirdValue, T4 fourthValue) {
         this.firstValue = firstValue;
         this.secondValue = secondValue;
@@ -116,18 +122,30 @@ public class Tuple4<T1, T2, T3, T4> implements Tuple {
         return fourthValue;
     }
 
+    /**
+     * Appends the value of the provided {@link Tuple1} to the end of this instance and returns a {@link Tuple5}.
+     */
     public <T5> Tuple5<T1, T2, T3, T4, T5> append(final Tuple1<T5> other) {
         return new Tuple5<>(firstValue, secondValue, thirdValue, fourthValue, other.getFirst());
     }
 
+    /**
+     * Appends the values of the provided {@link Tuple2} to the end of this instance and returns a {@link Tuple6}.
+     */
     public <T5, T6> Tuple6<T1, T2, T3, T4, T5, T6> append(final Tuple2<T5, T6> other) {
         return new Tuple6<>(firstValue, secondValue, thirdValue, fourthValue, other.getFirst(), other.getSecond());
     }
 
+    /**
+     * Appends the values of the provided {@link Tuple3} to the end of this instance and returns a {@link Tuple7}.
+     */
     public <T5, T6, T7> Tuple7<T1, T2, T3, T4, T5, T6, T7> append(final Tuple3<T5, T6, T7> other) {
         return new Tuple7<>(firstValue, secondValue, thirdValue, fourthValue, other.getFirst(), other.getSecond(), other.getThird());
     }
 
+    /**
+     * Appends the values of the provided {@link Tuple4} to the end of this instance and returns a {@link Tuple8}.
+     */
     public <T5, T6, T7, T8> Tuple8<T1, T2, T3, T4, T5, T6, T7, T8> append(final Tuple4<T5, T6, T7, T8> other) {
         return new Tuple8<>(firstValue, secondValue, thirdValue, fourthValue, other.getFirst(), other.getSecond(), other.getThird(), other.getFourth());
     }

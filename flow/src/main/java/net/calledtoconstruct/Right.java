@@ -10,6 +10,9 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
+/**
+ * Right implements the container for the right value of an {@link Either}.
+ */
 public class Right<TLeft, TRight> implements Either<TLeft, TRight> {
 
     private final TRight value;

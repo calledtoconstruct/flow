@@ -2,6 +2,9 @@ package net.calledtoconstruct;
 
 import java.util.Optional;
 
+/**
+ * An implementation of the Tuple interface which contains eight elements of type T1, T2, T3, T4, T5, T6, T7 and T8.
+ */
 public class Tuple8<T1, T2, T3, T4, T5, T6, T7, T8> implements Tuple {
 
     private final T1 firstValue;
@@ -13,6 +16,9 @@ public class Tuple8<T1, T2, T3, T4, T5, T6, T7, T8> implements Tuple {
     private final T7 seventhValue;
     private final T8 eighthValue;
 
+    /**
+     * A constructor for the {@link Tuple8} class which accepts eight values of types T1, T2, T3, T4, T5, T6, T7 and T8.
+     */
     public Tuple8(T1 firstValue, T2 secondValue, T3 thirdValue, T4 fourthValue, T5 fifthValue, T6 sixthValue, T7 seventhValue, T8 eighthValue) {
         this.firstValue = firstValue;
         this.secondValue = secondValue;
