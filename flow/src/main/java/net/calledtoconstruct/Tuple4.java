@@ -150,18 +150,30 @@ public class Tuple4<T1, T2, T3, T4> implements Tuple {
         return new Tuple8<>(firstValue, secondValue, thirdValue, fourthValue, other.getFirst(), other.getSecond(), other.getThird(), other.getFourth());
     }
 
+    /**
+     * Prepends the value of the provided {@link Tuple1} to the beginning of this instance and returns a {@link Tuple5}.
+     */
     public <T5> Tuple5<T5, T1, T2, T3, T4> prepend(final Tuple1<T5> other) {
         return new Tuple5<>(other.getFirst(), firstValue, secondValue, thirdValue, fourthValue);
     }
 
+    /**
+     * Prepends the values of the provided {@link Tuple2} to the beginning of this instance and returns a {@link Tuple6}.
+     */
     public <T5, T6> Tuple6<T5, T6, T1, T2, T3, T4> prepend(final Tuple2<T5, T6> other) {
         return new Tuple6<>(other.getFirst(), other.getSecond(), firstValue, secondValue, thirdValue, fourthValue);
     }
 
+    /**
+     * Prepends the values of the provided {@link Tuple3} to the beginning of this instance and returns a {@link Tuple7}.
+     */
     public <T5, T6, T7> Tuple7<T5, T6, T7, T1, T2, T3, T4> prepend(final Tuple3<T5, T6, T7> other) {
         return new Tuple7<>(other.getFirst(), other.getSecond(), other.getThird(), firstValue, secondValue, thirdValue, fourthValue);
     }
 
+    /**
+     * Prepends the values of the provided {@link Tuple4} to the beginning of this instance and returns a {@link Tuple8}.
+     */
     public <T5, T6, T7, T8> Tuple8<T5, T6, T7, T8, T1, T2, T3, T4> prepend(final Tuple4<T5, T6, T7, T8> other) {
         return new Tuple8<>(other.getFirst(), other.getSecond(), other.getThird(), other.getFourth(), firstValue, secondValue, thirdValue, fourthValue);
     }

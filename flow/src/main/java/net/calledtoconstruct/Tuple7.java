@@ -162,6 +162,9 @@ public class Tuple7<T1, T2, T3, T4, T5, T6, T7> implements Tuple {
         return new Tuple8<>(firstValue, secondValue, thirdValue, fourthValue, fifthValue, sixthValue, seventhValue, other.getFirst());
     }
 
+    /**
+     * Prepends the value of the provided {@link Tuple1} to the beginning of this instance and returns a {@link Tuple8}.
+     */
     public <T8> Tuple8<T8, T1, T2, T3, T4, T5, T6, T7> prepend(final Tuple1<T8> other) {
         return new Tuple8<>(other.getFirst(), firstValue, secondValue, thirdValue, fourthValue, fifthValue, sixthValue, seventhValue);
     }
