@@ -16,6 +16,13 @@ public class Tuple6<T1, T2, T3, T4, T5, T6> implements Tuple {
 
     /**
      * A constructor for the {@link Tuple6} class which accepts six values of types T1, T2, T3, T4, T5 and T6.
+     * 
+     * @param firstValue The first value to be stored.
+     * @param secondValue The second value to be stored.
+     * @param thirdValue The third value to be stored.
+     * @param fourthValue The fourth value to be stored.
+     * @param fifthValue The fifth value to be stored.
+     * @param sixthValue The sixth value to be stored.
      */
     public Tuple6(T1 firstValue, T2 secondValue, T3 thirdValue, T4 fourthValue, T5 fifthValue, T6 sixthValue) {
         this.firstValue = firstValue;
@@ -146,6 +153,10 @@ public class Tuple6<T1, T2, T3, T4, T5, T6> implements Tuple {
 
     /**
      * Appends the value of the provided {@link Tuple1} to the end of this instance and returns a {@link Tuple7}.
+     * 
+     * @param <T7> Type of the value contained in the {@link Tuple1} that will be appended.
+     * @param other An instance of {@link Tuple1} containing the value of type {@code T7} to be appended.
+     * @return A {@link Tuple7} containing the values from this instance and the value from {@code other}.
      */
     public <T7> Tuple7<T1, T2, T3, T4, T5, T6, T7> append(final Tuple1<T7> other) {
         return new Tuple7<>(firstValue, secondValue, thirdValue, fourthValue, fifthValue, sixthValue, other.getFirst());
@@ -153,6 +164,11 @@ public class Tuple6<T1, T2, T3, T4, T5, T6> implements Tuple {
 
     /**
      * Appends the values of the provided {@link Tuple2} to the end of this instance and returns a {@link Tuple8}.
+     * 
+     * @param <T7> Type of the first value contained in the {@link Tuple2} that will be appended.
+     * @param <T8> Type of the second value contained in the {@link Tuple2} that will be appended.
+     * @param other An instance of {@link Tuple2} containing the values of types {@code T7} and {@code T8} to be appended.
+     * @return A {@link Tuple8} containing the values from this instance and the values from {@code other}.
      */
     public <T7, T8> Tuple8<T1, T2, T3, T4, T5, T6, T7, T8> append(final Tuple2<T7, T8> other) {
         return new Tuple8<>(firstValue, secondValue, thirdValue, fourthValue, fifthValue, sixthValue, other.getFirst(), other.getSecond());
@@ -160,6 +176,10 @@ public class Tuple6<T1, T2, T3, T4, T5, T6> implements Tuple {
 
     /**
      * Prepends the value of the provided {@link Tuple1} to the beginning of this instance and returns a {@link Tuple7}.
+     * 
+     * @param <T7> Type of the value contained in the {@link Tuple1} that will be prepended.
+     * @param other An instance of {@link Tuple1} containing the value of type {@code T7} to be prepended.
+     * @return A {@link Tuple7} containing the value from {@code other} and the values from this instance.
      */
     public <T7> Tuple7<T7, T1, T2, T3, T4, T5, T6> prepend(final Tuple1<T7> other) {
         return new Tuple7<>(other.getFirst(), firstValue, secondValue, thirdValue, fourthValue, fifthValue, sixthValue);
@@ -167,6 +187,11 @@ public class Tuple6<T1, T2, T3, T4, T5, T6> implements Tuple {
 
     /**
      * Prepends the values of the provided {@link Tuple2} to the beginning of this instance and returns a {@link Tuple8}.
+     * 
+     * @param <T7> Type of the first value contained in the {@link Tuple2} that will be prepended.
+     * @param <T8> Type of the second value contained in the {@link Tuple2} that will be prepended.
+     * @param other An instance of {@link Tuple2} containing the values of types {@code T7} and {@code T8} to be prepended.
+     * @return A {@link Tuple8} containing the values from {@code other} and the values from this instance.
      */
     public <T7, T8> Tuple8<T7, T8, T1, T2, T3, T4, T5, T6> prepend(final Tuple2<T7, T8> other) {
         return new Tuple8<>(other.getFirst(), other.getSecond(), firstValue, secondValue, thirdValue, fourthValue, fifthValue, sixthValue);

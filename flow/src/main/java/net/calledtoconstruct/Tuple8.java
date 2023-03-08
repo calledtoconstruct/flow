@@ -18,6 +18,15 @@ public class Tuple8<T1, T2, T3, T4, T5, T6, T7, T8> implements Tuple {
 
     /**
      * A constructor for the {@link Tuple8} class which accepts eight values of types T1, T2, T3, T4, T5, T6, T7 and T8.
+     * 
+     * @param firstValue The first value to be stored.
+     * @param secondValue The second value to be stored.
+     * @param thirdValue The third value to be stored.
+     * @param fourthValue The fourth value to be stored.
+     * @param fifthValue The fifth value to be stored.
+     * @param sixthValue The sixth value to be stored.
+     * @param seventhValue The seventh value to be stored.
+     * @param eighthValue The eighth value to be stored.
      */
     public Tuple8(T1 firstValue, T2 secondValue, T3 thirdValue, T4 fourthValue, T5 fifthValue, T6 sixthValue, T7 seventhValue, T8 eighthValue) {
         this.firstValue = firstValue;

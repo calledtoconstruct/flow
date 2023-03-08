@@ -17,6 +17,14 @@ public class Tuple7<T1, T2, T3, T4, T5, T6, T7> implements Tuple {
 
     /**
      * A constructor for the {@link Tuple7} class which accepts seven values of types T1, T2, T3, T4, T5, T6 and T7.
+     * 
+     * @param firstValue The first value to be stored.
+     * @param secondValue The second value to be stored.
+     * @param thirdValue The third value to be stored.
+     * @param fourthValue The fourth value to be stored.
+     * @param fifthValue The fifth value to be stored.
+     * @param sixthValue The sixth value to be stored.
+     * @param seventhValue The seventh value to be stored.
      */
     public Tuple7(T1 firstValue, T2 secondValue, T3 thirdValue, T4 fourthValue, T5 fifthValue, T6 sixthValue, T7 seventhValue) {
         this.firstValue = firstValue;
@@ -157,13 +165,21 @@ public class Tuple7<T1, T2, T3, T4, T5, T6, T7> implements Tuple {
 
     /**
      * Appends the value of the provided {@link Tuple1} to the end of this instance and returns a {@link Tuple8}.
+     * 
+     * @param <T8> Type of the value contained in the {@link Tuple1} that will be appended.
+     * @param other An instance of {@link Tuple1} containing the value of type {@code T8} to be appended.
+     * @return A {@link Tuple8} containing the values from this instance and the value from {@code other}.
      */
     public <T8> Tuple8<T1, T2, T3, T4, T5, T6, T7, T8> append(final Tuple1<T8> other) {
         return new Tuple8<>(firstValue, secondValue, thirdValue, fourthValue, fifthValue, sixthValue, seventhValue, other.getFirst());
     }
 
     /**
-     * Prepends the value of the provided {@link Tuple1} to the beginning of this instance and returns a {@link Tuple8}.
+     * Prepends the value of the provided {@link Tuple1} to the beginning of this instance.
+     * 
+     * @param <T8> Type of the value contained in the {@link Tuple1} that will be prepended.
+     * @param other An instance of {@link Tuple1} containing the value of type {@code T8} to be prepended.
+     * @return A {@link Tuple8} containing the value from {@code other} and the values from this instance.
      */
     public <T8> Tuple8<T8, T1, T2, T3, T4, T5, T6, T7> prepend(final Tuple1<T8> other) {
         return new Tuple8<>(other.getFirst(), firstValue, secondValue, thirdValue, fourthValue, fifthValue, sixthValue, seventhValue);
