@@ -4,7 +4,7 @@ import java.lang.reflect.Array;
 import java.util.Optional;
 
 /**
- * The tuple interface provides the definition for functions common to all Tuple\<...\> implementations.
+ * The tuple interface provides the definition for functions common to all {@link Tuple} implementations.
  */
 public interface Tuple {
     /**
@@ -52,7 +52,7 @@ public interface Tuple {
     <T> Optional<Tuple> tryUnshift(final T value);
 
     /**
-     * Converts a Tuple1\<T\> instance to an array of type T
+     * Converts a {@link Tuple1} instance to an array of type T
      * 
      * @param <T> The type of the value to be extracted.
      * @param tuple The {@link Tuple} containing the value to be extracted.
@@ -66,7 +66,7 @@ public interface Tuple {
     }
 
     /**
-     * Converts a Tuple2\<T\> instance to an array of type T
+     * Converts a {@link Tuple2} instance to an array of type T
      * 
      * @param <T> The type of the values to be extracted.
      * @param tuple The {@link Tuple} containing the values to be extracted.
@@ -81,7 +81,7 @@ public interface Tuple {
     }
 
     /**
-     * Converts a Tuple3\<T\> instance to an array of type T
+     * Converts a {@link Tuple3} instance to an array of type T
      * 
      * @param <T> The type of the values to be extracted.
      * @param tuple The {@link Tuple} containing the values to be extracted.
@@ -97,7 +97,7 @@ public interface Tuple {
     }
 
     /**
-     * Converts a Tuple4\<T\> instance to an array of type T
+     * Converts a {@link Tuple4} instance to an array of type T
      * 
      * @param <T> The type of the values to be extracted.
      * @param tuple The {@link Tuple} containing the values to be extracted.
@@ -114,7 +114,7 @@ public interface Tuple {
     }
 
     /**
-     * Converts a Tuple5\<T\> instance to an array of type T
+     * Converts a {@link Tuple5} instance to an array of type T
      * 
      * @param <T> The type of the values to be extracted.
      * @param tuple The {@link Tuple} containing the values to be extracted.
@@ -132,7 +132,7 @@ public interface Tuple {
     }
 
     /**
-     * Converts a Tuple6\<T\> instance to an array of type T
+     * Converts a {@link Tuple6} instance to an array of type T
      * 
      * @param <T> The type of the values to be extracted.
      * @param tuple The {@link Tuple} containing the values to be extracted.
@@ -151,7 +151,7 @@ public interface Tuple {
     }
 
     /**
-     * Converts a Tuple7\<T\> instance to an array of type T
+     * Converts a {@link Tuple7} instance to an array of type T
      * 
      * @param <T> The type of the values to be extracted.
      * @param tuple The {@link Tuple} containing the values to be extracted.
@@ -171,7 +171,7 @@ public interface Tuple {
     }
 
     /**
-     * Converts a Tuple8\<T\> instance to an array of type T
+     * Converts a {@link Tuple8} instance to an array of type T
      * 
      * @param <T> The type of the values to be extracted.
      * @param tuple The {@link Tuple} containing the values to be extracted.
@@ -192,7 +192,7 @@ public interface Tuple {
     }
 
     /**
-     * Attempts to return the first element from a Tuple.  If the Tuple is empty, an empty Optional\<T\> is returned.
+     * Attempts to return the first element from a Tuple.  If the Tuple is empty, an empty {@link java.util.Optional} is returned.
      * 
      * @param <T> The type of the value to be extracted.
      * @param clazz The {@link java.lang.Class} of the value to be extracted.
@@ -201,7 +201,7 @@ public interface Tuple {
     <T> Optional<T> tryGetFirst(final Class<T> clazz);
 
     /**
-     * Attempts to return the last element from a Tuple.  If the Tuple is empty, an empty Optional\<T\> is returned.
+     * Attempts to return the last element from a Tuple.  If the Tuple is empty, an empty {@link java.util.Optional} is returned.
      * 
      * @param <T> The type of the value to be extracted.
      * @param clazz The {@link java.lang.Class} of the value to be extracted.
