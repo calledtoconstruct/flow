@@ -29,7 +29,7 @@ A collection of potentially useful classes for streamlining the process flow of 
 
 ## [Tuple](https://github.com/calledtoconstruct/flow/blob/main/flow/src/main/java/net/calledtoconstruct/Tuple.java)
 
-A collection of one or more values of discrete data types.  In contrast to Array or List which require elements of the collection to share the same data type, the Tuple interface and implementations, allow for elements of different data types.  However, the trade-off is that Tuple can only support a small number of elements.  This library currently supports up-to four (4) elements.
+A collection of one or more values of discrete data types.  In contrast to Array or List which require elements of the collection to share the same data type, the Tuple interface and implementations, allow for elements of different data types.  However, the trade-off is that Tuple can only support a small number of elements.  This library currently supports up-to 8 elements.
 
 Implementations: 
 
